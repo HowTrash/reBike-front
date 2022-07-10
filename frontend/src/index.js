@@ -2,14 +2,16 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import Login from './Page/Login';
 import Header from './component/Header';
-
+import Register from './Page/Register';
 import reportWebVitals from './reportWebVitals';
+import RegisterSuccess from './Page/RegisterSuccess';
+import RegisS from './Page/RegisS';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <Header />
-    <Login />
+    <RegisS/>
   </React.StrictMode>
 );
 

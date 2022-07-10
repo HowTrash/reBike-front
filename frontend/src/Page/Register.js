@@ -3,6 +3,7 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { green, purple } from '@mui/material/colors';
 import { Divider,Button,CssBaseline,TextField,Box,Typography,Container,Link, styled } from '@mui/material';
 
+
   const theme = createTheme({
     palette: {
       primary: {
@@ -19,41 +20,20 @@ import { Divider,Button,CssBaseline,TextField,Box,Typography,Container,Link, sty
     },
 
     '& .MuiOutlinedInput-root': {
-      '&:hover fieldset': {
-        borderColor: '#759F98',
+        '&:hover fieldset': {
+          borderColor: '#759F98',
+        },
       },
-    },
-    
   }));
 
-  const KakaoLoginBtn = styled(Button)(({ }) => ({
-    backgroundColor : 'white',
-    "&:hover": {
-      color : "yellow",
-      backgroundColor : "#F1DC2C",
-      borderColor :"#F1DC2C"
-    },
-    
-  }));
-
-  const NaverLoginBtn = styled(Button)(({ }) => ({
-    backgroundColor : 'white',
-    "&:hover": {
-      color : "#6AED64",
-      backgroundColor : "#54B94E",
-      borderColor :"#54B94E"
-    },
-    
-  }));
-
-
-  function Login() {
+  function Register() {
     const handleSubmit = (event) => {
         event.preventDefault();
         const data = new FormData(event.currentTarget);
         console.log({
           email: data.get('email'),
           password: data.get('password'),
+          name: data.get('name'),
       });
     };
   return (
@@ -71,7 +51,7 @@ import { Divider,Button,CssBaseline,TextField,Box,Typography,Container,Link, sty
               >
       
                 <Typography component= "h1" color = "primary" fontWeight = 'bold' variant="h4">
-                    로그인
+                    회원가입
                 </Typography>
                 <Box component="form" color="info.contrastText" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
                     <UserInfoTf
@@ -94,33 +74,23 @@ import { Divider,Button,CssBaseline,TextField,Box,Typography,Container,Link, sty
                       id="password"
                       autoComplete="current-password"
                     />
+                    <UserInfoTf
+                      margin="normal"
+                      required
+                      fullWidth
+                      name="name"
+                      label="name"
+                      type="name"
+                      id="name"
+                    />
                     <Button
                       type="submit"
                       fullWidth
                       variant="contained"
-                      sx={{ mt: 3, mb: 2, height : 50, color : 'white',fontWeight: 'bold',fontSize: 15}}
+                      sx={{ mt: 3, mb: 2, height : 50, color : 'white',fontWeight: 'bold',fontSize:20}}
                     >
-                      Login
+                      가입하기
                     </Button>
-                    <Typography align='right'>
-                      <Link href="#" style={{ textDecoration: 'none',fontWeight: 'bold'}}>
-                         가입하기
-                      </Link>
-                    </Typography>
-                    <Divider sx={{color : 'lightgrey'}}>또는</Divider>
-
-                    <KakaoLoginBtn
-                      variant="outlined"
-                      sx={{borderColor : '#F1DC2C',color: '#F1DC2C', fontWeight: 'bold',width:'46%',mt:3}}
-                    >
-                      카카오로 로그인하기
-                    </KakaoLoginBtn>
-                    <NaverLoginBtn
-                      variant="outlined"
-                      sx={{borderColor : '#54B94E',  color: '#54B94E', fontWeight: 'bold',width:'46%',mt:3,ml:3.6 }}
-                    >
-                      네이버로 로그인하기
-                    </NaverLoginBtn>
                 </Box>
               </Box>
         </Container>
@@ -128,5 +98,4 @@ import { Divider,Button,CssBaseline,TextField,Box,Typography,Container,Link, sty
     </Container>
   );
 }
-
-export default Login;
+export default Register;

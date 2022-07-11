@@ -25,8 +25,12 @@ const style = {
      height:"40px",
      width:"300px",
      borderRadius:"5px",
+     marginTop:"25px",
+     textAlign:"center",
      fontSize:"15px",
-     fontWeight:"bold", 
+     fontWeight:"bold",
+     textDecoration: "none",
+     p: 1,
     "&:hover":{backgroundColor: "#5e8079", color:"#ffffff"}
   };
 
@@ -141,10 +145,9 @@ function Register() {
             가입이 완료되었습니다!
           </Typography>
           <TrashCan/>
-          <Box sx={{mb:3}}></Box>
-          <Button 
-          sx={btnstyle} 
-          onClick={handleClose}>로그인하러가기</Button>
+          <Link href="/login"
+          sx={btnstyle}
+          >로그인하러가기</Link>
         </Box>
       </Modal>
       </React.Fragment>

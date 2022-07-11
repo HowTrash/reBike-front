@@ -1,5 +1,6 @@
 import * as React from "react";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import {
     Divider,
     Button,
@@ -129,8 +130,7 @@ function Login() {
                                 Login
                             </Button>
                             <Typography align="right">
-                                <Link
-                                    href="#"
+                                <Link href="/register"
                                     style={{
                                         textDecoration: "none",
                                         fontWeight: "bold",

@@ -1,10 +1,36 @@
 import * as React from 'react';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { green, purple } from '@mui/material/colors';
-import { Divider,Button,CssBaseline,TextField,Box,Typography,Container,Link, styled } from '@mui/material';
+import { Modal,Backdrop,Button,CssBaseline,TextField,Box,Typography,Container,Link, styled } from '@mui/material';
+import { ReactComponent as TrashCan } from "../../src/images/TrashCan.svg";
 
+const style = {
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    width: 400,
+    bgcolor: 'background.paper',
+    borderRadius:3,
+    boxShadow: 24,
+    p: 4,
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center"
+  };
 
-  const theme = createTheme({
+  const btnstyle = {
+    borderColor: "transparent",
+    backgroundColor: "#759F98",
+     color:"#ffffff",
+     height:"40px",
+     width:"300px",
+     borderRadius:"5px",
+     fontSize:"15px",
+     fontWeight:"bold", 
+    "&:hover":{backgroundColor: "#5e8079", color:"#ffffff"}
+  };
+
+const theme = createTheme({
     palette: {
       primary: {
         main: "#759F98",
@@ -26,7 +52,10 @@ import { Divider,Button,CssBaseline,TextField,Box,Typography,Container,Link, sty
       },
   }));
 
-  function Register() {
+function Register() {
+  const [open, setOpen] = React.useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
     const handleSubmit = (event) => {
         event.preventDefault();
         const data = new FormData(event.currentTarget);
@@ -36,10 +65,11 @@ import { Divider,Button,CssBaseline,TextField,Box,Typography,Container,Link, sty
           name: data.get('name'),
       });
     };
+
   return (
     <Container  style={{backgroundColor : '#E7F5EF',  border: "solid", borderColor :"#E7F5EF", minWidth: "100%", height: "100vh"}}>
     <ThemeProvider theme={theme} >
-        <Container component="main" maxWidth="xs" sx={{  mb: 2 }} >
+        <Container component="main" maxWidth="xs" sx={{mb: 2 }} >
             <CssBaseline />
               <Box
                 sx={{
@@ -83,14 +113,41 @@ import { Divider,Button,CssBaseline,TextField,Box,Typography,Container,Link, sty
                       type="name"
                       id="name"
                     />
-                    <Button
-                      type="submit"
-                      fullWidth
-                      variant="contained"
-                      sx={{ mt: 3, mb: 2, height : 50, color : 'white',fontWeight: 'bold',fontSize:20}}
-                    >
-                      가입하기
-                    </Button>
+                    <React.Fragment>
+      <Button
+      type="submit"
+      fullWidth
+      variant="contained"
+      sx={{ mt: 3, mb: 2, height : 50, color : 'white',fontWeight: 'bold',fontSize:20}}
+      onClick={handleOpen}>가입하기</Button>
+
+
+      <Modal
+        aria-labelledby="modal-title"
+        aria-describedby="modal-description"
+        open={open}
+        onClose={handleClose}
+        closeAfterTransition
+        BackdropComponent={Backdrop}
+        BackdropProps={{
+          timeout: 700,
+        }}
+      >
+        <Box sx={style} >
+          <Typography id="modal-title" variant="h4" fontWeight="bold" component="h1" sx={{mb:1}}>
+            회원가입 완료
+          </Typography>
+          <Typography id="modal-description" variant="h6" sx={{mb: 3, mt: 2 }}>
+            가입이 완료되었습니다!
+          </Typography>
+          <TrashCan/>
+          <Box sx={{mb:3}}></Box>
+          <Button 
+          sx={btnstyle} 
+          onClick={handleClose}>로그인하러가기</Button>
+        </Box>
+      </Modal>
+      </React.Fragment>
                 </Box>
               </Box>
         </Container>
@@ -98,4 +155,5 @@ import { Divider,Button,CssBaseline,TextField,Box,Typography,Container,Link, sty
     </Container>
   );
 }
+
 export default Register;

@@ -5,6 +5,7 @@ import Login from "./Page/Login";
 import MyPage from "./Page/MyPage";
 import MainPage from "./Page/MainPage";
 import Header from "./component/Header";
+import Register from "./Page/Register";
 
 import {ReactComponent as GreenBack } from './images/greenBack.svg'
 
@@ -17,13 +18,13 @@ function App() {
             <Router>
             <Header />
                 <Routes>
+                    <Route path="/register" element={<Register />} />
                     <Route path="/login" element={<Login />} />
                     <Route path="/mypage" element={<MyPage />} />
                     <Route path="/mainpage" element={<MainPage />} />
                 </Routes>
             </Router>
         </div>
-        
     );
 }
 

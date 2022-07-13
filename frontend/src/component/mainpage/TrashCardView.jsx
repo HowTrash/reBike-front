@@ -9,6 +9,7 @@ export default function MultiActionAreaCard() {
           component="img"
           height="300"
           image='https://picsum.photos/400/300'
+          style={{padding:3, borderRadius:8}}
        
         />
           <Typography fontWeight={"bold"} fontSize={20} component="div" margin ={1} marginTop={2}>
@@ -17,7 +18,8 @@ export default function MultiActionAreaCard() {
  
       </CardActionArea>
       <CardActions >
-        <Button size="small" sx={{margin : "auto", bgcolor : "#C0F0FF", border:1}}>
+        <Button size="small" 
+          sx={{margin : "auto", bgcolor : "#76F2BE", borderColor:"#76F2BE",color: "black", }}>
           더보기
         </Button>
       </CardActions>

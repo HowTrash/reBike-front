@@ -30,14 +30,14 @@ const GetLogoLottie = ()=>{
 
       <Link 
         href="/mainpage"
-        sx={{position: 'absolute',left: 55, top:5, width: 160, height: 120,textDecoration:'none'}}> 
+        sx={{position: 'absolute',left: 55, top:-5, width: 180, height: 140,textDecoration:'none'}}> 
         <Button 
           ref={likecontainer}
           style={{fontSize : 20, color : "black", fontWeight: 'bold', justifyContent: "flex-end",  mb: 5}}>
           </Button>
           <Typography
             style={{fontSize: 8,fontWeight:"bold",display:"flex", justifyContent: "center",}}>
-            ReBIKE</Typography>     
+            R e B I K E</Typography>     
        </Link>
 
        

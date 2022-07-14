@@ -13,7 +13,7 @@ const SearchResult = () => {
  
     <Box textAlign={"center"} >
       <div>
-        <Box sx={{ borderRadius : 3, border : 1 ,borderColor :"black" ,backgroundColor: "white",width: 600,height: 300, margin:'auto',mt:23,}} >
+        <Box sx={{ borderRadius : 3, border : 1 ,borderColor :"black" ,backgroundColor: "white",width: 600,height: 300, margin:'auto',mt:25,}} >
             <CardMedia
                 component="img"
                 width ="600"

@@ -130,7 +130,7 @@ function Register() {
       nameRegex.test(name)
     ) {
       axios
-        .post("/user/signup/", {
+        .post("http://localhost:8080/user/signup/", {
           name: data.get("name"),
           pw: data.get("password"),
           alias: "hohohoho",

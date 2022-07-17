@@ -1,16 +1,8 @@
 import * as React from "react";
+import { useState } from "react";
+import axios from "axios";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import {
-    Divider,
-    Button,
-    CssBaseline,
-    TextField,
-    Box,
-    Typography,
-    Container,
-    Link,
-    styled,
-} from "@mui/material";
+import { Divider, Button, CssBaseline, TextField, Box, Typography, Container, Link, styled,} from "@mui/material";
 
 const theme = createTheme({
     palette: {
@@ -50,6 +42,7 @@ const NaverLoginBtn = styled(Button)(({}) => ({
 }));
 
 function Login() {
+
     const handleSubmit = (event) => {
         event.preventDefault();
         const data = new FormData(event.currentTarget);
@@ -58,6 +51,7 @@ function Login() {
             email: data.get("email"),
             password: data.get("password"),
         });
+        
     };
 
     return (
@@ -74,12 +68,7 @@ function Login() {
                 <Container component="main" maxWidth="xs" sx={{ mb: 2, mt: 20 }}>
                     <CssBaseline />
                     <Box
-                        sx={{
-                            display: "flex",
-                            flexDirection: "column",
-                            alignItems: "center",
-                        }}
-                    >
+                        sx={{ display: "flex", flexDirection: "column", alignItems: "center", }} >
                         <Typography
                             component="h1"
                             color="primary"
@@ -99,8 +88,8 @@ function Login() {
                                 margin="normal"
                                 required
                                 fullWidth
-                                id="email"
-                                label="Email Address"
+                                id="userId"
+                                label="ID"
                                 name="email"
                                 autoComplete="email"
                                 autoFocus
@@ -110,7 +99,7 @@ function Login() {
                                 required
                                 fullWidth
                                 name="password"
-                                label="Password"
+                                label="PW"
                                 type="password"
                                 id="password"
                                 autoComplete="current-password"

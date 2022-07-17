@@ -1,63 +1,110 @@
 from django.http import HttpResponse, JsonResponse
+
+from django.shortcuts import redirect
+from rest_framework.decorators import api_view
+
 from django.core import serializers
 
-from .serializers import UserSerializer
+from .serializers import UserSerializer, UserSignupResponse, SignupInput
 from .userUtil import user_find_by_name, user_compPW, user_create_client, user_change_pw, user_change_alias
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from rest_framework.renderers import JSONRenderer
 
-# 로그인
+from django.http import HttpResponse
+from .models import user
+
+
+@api_view(['POST'])
 def user_login(request):
-    input_id = request.GET.get('id', '')
-    input_pw = request.GET.get('pw', '')
+    input_name = request.data['name']
+    input_pw = request.data['pw']
+    is_login = False
+
+    data = None
     user_data = None
     is_login = False
 
-    if input_pw != '' and input_id != '':
-        user = user_find_by_name(input_id).first()
+    if input_pw and input_name:
+        user = user_find_by_name(input_name).first()
         if user:
-            is_login = user_compPW(input_pw, user)
-            if is_login:
-                user_data = UserSerializer(user)
+            if user_compPW(input_pw, user):
+                user_data = UserSerializer(data={'name': user.name, 'alias': user.alias, 'email': user.email})
+                if user_data.is_valid():
+                    data = {
+                        "user": user_data.data,
+                        "is_login": is_login
+                    }
+    return JsonResponse(data)
 
-    result = {
-        'user': user_data.data,
-        'is_login': is_login,
-    }
 
-    return JsonResponse(result)
+# rebikeuser/views.py
+class UserSignupAPI(APIView):
+    def post(self, request):
+        name = request.data['name']  # dict로 되있음
+        pw = request.data['pw']  # 바디 읽는 법
+        alias = request.data['alias']
+        email = request.data['email']
+        serializer = SignupInput(data={'email': email, 'pw': pw, 'alias': alias, 'name': name})
+        if serializer.is_valid():
+            str = user_create_client(name, email, pw, alias)
+            serializer2 = UserSignupResponse(str, many=False)
+            return Response(serializer2.data)  # Only name
+        return redirect('/user/login/')
 
-# 회원가입
-def user_signup(request):
-    user_id = request.GET.get('id')
-    alias = request.GET.get('alias')
-    email = request.GET.get('email')
-    pw = request.GET.get('pw')
 
-    result = user_create_client(user_id, email, pw, alias)
+# get으로 회원가입 폼 화면 가져오기
+#     def get(self, request):
+#         return HttpResponse('회원가입 폼 페이지 연결')
 
-    return HttpResponse(result)
 
-# 비밀번호변경
+@api_view(['POST'])
 def user_pw_change(request):
-    input_id = request.GET.get('id', '')
-    input_pw = request.GET.get('pw', '')
-    result = False
+    input_name = request.data['name']
+    input_pw = request.data['pw']  # 새 비밀번호
+    input_past_pw = request.data['pastpw']  # 이전 비밀번호
 
-    if input_pw and input_id:
-        user = user_find_by_name(input_id).first()
-        if user:
-            result = user_change_pw(user, input_pw)
+    if input_name and input_pw and input_past_pw:
+        finduser = user_find_by_name(input_name).first()
+        if finduser.pw == input_past_pw:  # 예전 pw와 name으로 찾은 user의 pw 일치여부
+            user_change_pw(finduser, input_pw)
+            return HttpResponse("성공")
+            # user_change_pw(finduser, input_pw)
+        else:
+            return HttpResponse('이전 비밀번호가 일치 하지 않습니다.')
+    else:
+        return HttpResponse('실패')
 
-    return HttpResponse(result) #변경완료 시 True
 
-#
+@api_view(['POST'])
 def user_alias_change(request):
-    input_id = request.GET.get('id', '')
-    input_alias = request.GET.get('alias', '')
-    result = False
+    input_name = request.data['name']
+    input_alias = request.data['alias']
 
-    if input_alias and input_id:
-        user = user_find_by_name(input_id).first()
-        if user:
-            result = user_change_alias(user, input_alias)
+    if input_alias and input_name:
+        finduser = user_find_by_name(input_name).first()
+        if finduser:
+            user_change_alias(finduser, input_alias)  # True : 변경됨, False : 변경실패
+            return HttpResponse('성공')
+    return False
 
-    return HttpResponse(result) #변경완료 시 True
+
+@api_view(['GET'])
+def on_login(request):
+    qs = user.objects.all()
+    username = request.GET.get('username', '')
+    if username:
+        qs = qs.filter(user_name=username)
+    return HttpResponse(qs)
+#
+# def user_pw_change(request):
+#     input_id = request.GET.get('id', '')
+#     input_pw = request.GET.get('pw', '')
+#     result = False
+#
+#     if input_pw and input_id:
+#         user = user_find_by_name(input_id).first()
+#         if user:
+#             result = user_change_pw(user, input_pw)
+#
+#     return HttpResponse(result) #변경완료 시 True

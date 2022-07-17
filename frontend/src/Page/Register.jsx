@@ -36,10 +36,10 @@ const style = {
   };
 
 const theme = createTheme({
-    palette: {
-      primary: {
-        main: "#759F98",
-      },
+  palette: {
+    primary: {
+      main: "#759F98",
+    },
     },
   });
 
@@ -57,7 +57,7 @@ const theme = createTheme({
       },
   }));
 
-  const FormHelperTexts = styled(FormHelperText)`
+const FormHelperTexts = styled(FormHelperText)`
   width: 100%;
   padding-left: 12px;
   font-weight: 700;
@@ -141,9 +141,9 @@ function Register() {
                     <UserInfoTf
                       margin="normal"
                       required
-                      fullWidth
-                      id="email"
-                      label="Email Address"
+                fullWidth
+                id="email"
+                label="Email Address"
                       name="email"
                       autoComplete="email"
                       autoFocus
@@ -151,11 +151,11 @@ function Register() {
                     />
                     <FormHelperTexts>{emailError}</FormHelperTexts>
                     
-                    <UserInfoTf
-                      margin="normal"
-                      required
-                      fullWidth
-                      name="password"
+              <UserInfoTf
+                margin="normal"
+                required
+                fullWidth
+                name="password"
                       label="Password"
                       type="password"
                       id="password"
@@ -163,11 +163,11 @@ function Register() {
                     />
                     <FormHelperTexts>{passwordState}</FormHelperTexts>
 
-                    <UserInfoTf
-                      margin="normal"
-                      required
-                      fullWidth
-                      name="rePassword"
+              <UserInfoTf
+                margin="normal"
+                required
+                fullWidth
+                name="rePassword"
                       label="Password Confirm"
                       type="password"
                       id="rePassword"
@@ -175,11 +175,11 @@ function Register() {
                     />
                     <FormHelperTexts>{passwordError}</FormHelperTexts>
 
-                    <UserInfoTf
-                      margin="normal"
-                      required
-                      fullWidth
-                      name="name"
+              <UserInfoTf
+                margin="normal"
+                required
+                fullWidth
+                name="name"
                       label="name"
                       type="name"
                       id="name"
@@ -197,13 +197,13 @@ function Register() {
       <FormHelperTexts>{registerError}</FormHelperTexts>
 
       <Modal
-        aria-labelledby="modal-title"
-        aria-describedby="modal-description"
-        open={open}
-        onClose={handleClose}
-        closeAfterTransition
-        BackdropComponent={Backdrop}
-        BackdropProps={{
+                  aria-labelledby="modal-title"
+                  aria-describedby="modal-description"
+                  open={open}
+                  onClose={handleClose}
+                  closeAfterTransition
+                  BackdropComponent={Backdrop}
+                  BackdropProps={{
           timeout: 700,
         }}
       >
@@ -221,10 +221,10 @@ function Register() {
         </Box>
       </Modal>
       </React.Fragment>
-                </Box>
-              </Box>
+            </Box>
+          </Box>
         </Container>
-    </ThemeProvider>
+      </ThemeProvider>
     </Container>
   );
 }

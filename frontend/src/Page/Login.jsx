@@ -1,5 +1,5 @@
 import * as React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { Divider, Button, CssBaseline, TextField, Box, Typography, Container, Link, styled,} from "@mui/material";
@@ -43,6 +43,15 @@ const NaverLoginBtn = styled(Button)(({}) => ({
 
 function Login() {
 
+    // useEffect(() => {
+    //     if (localStorage.getItem('token') !== null) {
+    //       window.location.replace('http://localhost:3000/mainpage');
+    //     } 
+    //     // else {
+    //     //   setLoading(false);
+    //     // }
+    //   }, []);
+
     const handleSubmit = (event) => {
         event.preventDefault();
         
@@ -60,10 +69,21 @@ function Login() {
         })
         .then((response) => {
           // Handle success.
-          handleOpen();
-          console.log("Well done!");
-          console.log("User profile", response.data.user);
-          console.log("Is login?", response.data.is_login);
+        //   handleOpen();
+            console.log("Well done!");
+            console.log("User profile", response.data.user);
+            console.log("Is login?", response.data.is_login);
+            console.log("User ID", response.data.user.name);
+
+            if (response.data.user) {
+                localStorage.clear()
+                localStorage.setItem("userData", response.data.user.name)
+                console.log("아이디",localStorage.getItem("userData"))
+                // window.location.replace('/');
+            }else {
+                localStorage.clear()
+            }
+            
         })
         .catch((error) => {
           // Handle error.
@@ -71,8 +91,8 @@ function Login() {
         });
     };
 
-    const [open, setOpen] = React.useState(false);
-    const handleOpen = () => setOpen(true);
+    // const [open, setOpen] = React.useState(false);
+    // const handleOpen = () => setOpen(true);
 
     return (
         <Container

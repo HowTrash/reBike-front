@@ -67,7 +67,7 @@ function Login() {
             if (response.data.user) {
                 localStorage.clear()
                 localStorage.setItem("access_token", response.data.user.name)
-                console.log("아이디",localStorage.getItem("access_token"))
+                console.log("아이디는?",localStorage.getItem("access_token"))
 
                 alert("로그인 성공♻️")
 

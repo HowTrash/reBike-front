@@ -1,7 +1,6 @@
-import { useState, useEffect } from 'react';
-import {Button, Container, Box, Link,CssBaseline, Typography} from '@mui/material';
+import { useState, } from 'react';
+import {Button, Container, Box, Link,CssBaseline, Hidden} from '@mui/material';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import IsLogin from '../module/IsLogin';
 
 const theme = createTheme({
     palette: {
@@ -13,27 +12,22 @@ const theme = createTheme({
 
 function Header() {
 
-  const [loginState, setLoginState] = useState(true)
+  const [mouseOn, setMouseOn] = useState(false);
+
+  const handlePopoverOpen = () => {
+    setMouseOn(true);
+  };
+  const handlePopoverClose = () => {
+    setMouseOn(false);
+  };
+
   const token = localStorage.getItem("access_token");
-
-  // useEffect(() => {
-  //   // console.log(IsLogin())
-  //   // IsLogin() ? console.log("로그인중", loginState) : console.log("로그인not중")
-  //   IsLogin ? setLoginState(true) : console.log("로그인not중")
-  // }, [loginState]);
-
-  useEffect (()=>{
-    
-    if (localStorage.getItem('token') !== null) {
-      console.log(loginState)
-    } else {
-      setLoginState(false);
-    }
-  },[])
+  console.log(token);
 
   function deleteToken() {
     localStorage.removeItem("access_token");
   }
+
 
   return (
       <ThemeProvider theme={theme}>
@@ -50,22 +44,39 @@ function Header() {
                       HOWTRASH
                   </Link>
 
-                  {loginState ?(
+                  {token ?(
                   // if IsLogin is true
                   
                   <div>
+                    <Link
+                      href="/login"
+                      onClick={deleteToken}
+                      onMouseEnter={handlePopoverOpen} onMouseLeave={handlePopoverClose}
+                      sx={{ textDecoration: "none", color: "#759F98", fontSize: "small",mr:2 }}>
+                      Welcom, {token} 님
+                    </Link>
+                    {mouseOn?
+                    <Container
+                      style={{ position: 'absolute', top: 55 }}>
+                      <Box 
+                        display="flex" justifyContent="center" 
+                        sx={{
+                          background: "white", border: 1, borderRadius: 1, borderColor: "#E7F5EF", color: "#759F98",
+                          fontSize: 3, padding: 1, width: 100
+                          }}>
+                        클릭해서 로그아웃
+                      </Box>
+                    </Container>
+                      
+                    :
+                    Hidden}
+                    
                     <Button
                       variant="contained"
                       sx={{fontWeight: 'bold',mt:2,mb : 2,mr:2, color:'white',backgroundColor : "#759F98"}}>
                     <Link href= '/mypage' sx={{textDecoration: 'none', color : "white"}}>MyPage</Link>
                     </Button>
-                    <Link
-                      href="/login"
-                      onClick={deleteToken}
-                      sx={{ textDecoration: "none", color: "white" }}
-                    >
-                      {token} 님
-                    </Link>
+                    
                   </div>)
                   
                   : (// if IsLogin is false

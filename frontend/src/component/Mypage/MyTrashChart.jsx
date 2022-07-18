@@ -4,7 +4,7 @@ import {
     Container,
 
 } from "@mui/material";
-
+import Chart from "../chart/Chart";
 
 function MyTrashcan() {
     return(
@@ -33,7 +33,7 @@ function MyTrashcan() {
                         borderColor: "black",
                         height: "100vh",
                         pt:2, pb:2}}>
-                                                                   
+                            <Chart />                               
                 </Container>
             
         </Container>

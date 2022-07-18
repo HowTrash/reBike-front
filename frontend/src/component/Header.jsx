@@ -67,7 +67,6 @@ function Header() {
                         클릭해서 로그아웃
                       </Box>
                     </Container>
-                      
                     :
                     Hidden}
                     

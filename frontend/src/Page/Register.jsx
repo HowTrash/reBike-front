@@ -133,7 +133,7 @@ function Register() {
         .post("http://localhost:8080/user/signup/", {
           name: data.get("name"),
           pw: data.get("password"),
-          alias: "hohohoho",
+          alias: "아예",
           email: data.get("email"),
         })
         .then((response) => {

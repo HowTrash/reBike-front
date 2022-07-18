@@ -92,7 +92,6 @@ function MyPageNavigation() {
                                             color:"white",
                                             backgroundColor: "#759F98",
                                             borderColor: "#759F98",
-                                            
                                             }
                                         :{
                                             textDecoration: 'none',

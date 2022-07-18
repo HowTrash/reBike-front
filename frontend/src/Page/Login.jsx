@@ -79,8 +79,10 @@ function Login() {
                 localStorage.clear()
                 localStorage.setItem("userData", response.data.user.name)
                 console.log("아이디",localStorage.getItem("userData"))
-                // window.location.replace('/');
+                alert("로그인 성공♻️")
+                window.location.replace('/mainpage');
             }else {
+                console.log("아이디",localStorage.getItem("userData"))
                 localStorage.clear()
             }
             

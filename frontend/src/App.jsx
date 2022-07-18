@@ -1,4 +1,4 @@
-import React from "react";
+import { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
 import Login from "./Page/Login";
@@ -13,6 +13,22 @@ import MyTrashcan from "./component/Mypage/MyTrashcan";
 import MyTrashChart from "./component/Mypage/MyTrashChart";
 import ChangeInfo from "./component/Mypage/ChangeInfo";
 import SearchResult from "./component/mainpage/SearchResult";
+
+function IsLogin(access_token){
+    const [login, setLogin] = useState(false);
+    console.log("왜 안됨?")
+
+    useEffect(()=>{
+        if(localStorage.getItem({access_token}) !== null){
+            console.log("로그인 on", setLogin)
+        }else{
+            setLogin(false);
+            console.log("로그인 off", setLogin)
+        }
+    }, [])
+
+    return login
+}
 
 
 function App() {

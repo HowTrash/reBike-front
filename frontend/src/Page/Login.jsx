@@ -43,15 +43,6 @@ const NaverLoginBtn = styled(Button)(({}) => ({
 
 function Login() {
 
-    // useEffect(() => {
-    //     if (localStorage.getItem('token') !== null) {
-    //       window.location.replace('http://localhost:3000/mainpage');
-    //     } 
-    //     // else {
-    //     //   setLoading(false);
-    //     // }
-    //   }, []);
-
     const handleSubmit = (event) => {
         event.preventDefault();
         
@@ -68,8 +59,6 @@ function Login() {
           pw: data.get("password"),
         })
         .then((response) => {
-          // Handle success.
-        //   handleOpen();
             console.log("Well done!");
             console.log("User profile", response.data.user);
             console.log("Is login?", response.data.is_login);
@@ -77,12 +66,14 @@ function Login() {
 
             if (response.data.user) {
                 localStorage.clear()
-                localStorage.setItem("userData", response.data.user.name)
-                console.log("아이디",localStorage.getItem("userData"))
+                localStorage.setItem("access_token", response.data.user.name)
+                console.log("아이디",localStorage.getItem("access_token"))
+
                 alert("로그인 성공♻️")
+
                 window.location.replace('/mainpage');
             }else {
-                console.log("아이디",localStorage.getItem("userData"))
+                console.log("아이디",localStorage.getItem("access_token"))
                 localStorage.clear()
             }
             
@@ -92,9 +83,6 @@ function Login() {
           console.log("An error occurred:", error.response);
         });
     };
-
-    // const [open, setOpen] = React.useState(false);
-    // const handleOpen = () => setOpen(true);
 
     return (
         <Container

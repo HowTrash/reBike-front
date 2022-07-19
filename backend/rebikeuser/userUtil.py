@@ -2,6 +2,7 @@ import uuid
 import bcrypt
 
 from .models import user
+from django.http import HttpResponse
 
 
 #
@@ -37,9 +38,11 @@ def user_hash_pw(pw):
 #
 def user_create_client(name, email, pw, alias):
     if user_find_by_name(name):
-        return 'this id is duplicated'
+        return 1
     if user_find_by_alias(alias):
-        return 'this alias is duplicated'
+        return 2
+    if user_find_by_email(email):
+        return 3
     hash_pw, salt = user_hash_pw(pw)
     return user.objects.create(name=name, alias=alias, pw=hash_pw, salt=salt, email=email)
     # return user.objects.all()
@@ -50,19 +53,19 @@ def user_find_by_name(name):
     qs = user.objects.all()
     return qs.filter(name=name)
 
+def user_find_by_email(email):
+    return user.objects.all().filter(email=email)
 
 #
 def user_find_by_alias(alias):
     qs = user.objects.all()
-    result = qs.filter(alias=alias)
-    return result
+    return qs.filter(alias=alias)
 
 
 #
 def user_user_search_by_name(name):
     qs = user.objects.all()
-    result = qs.filter(name__icontains=name)
-    return result
+    return qs.filter(name__icontains=name)
 
 
 #

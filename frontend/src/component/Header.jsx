@@ -53,6 +53,7 @@ function Header() {
     setMouseOn(false);
   };
 
+
   const token = localStorage.getItem("access_token");
   console.log(token);
 
@@ -78,16 +79,19 @@ function Header() {
                   // if IsLogin is true
                   
                   <div>
-                    <Link
+                    <Button>
+                      <Link
                       href="/login"
                       onClick={deleteToken}
                       onMouseEnter={handlePopoverOpen} onMouseLeave={handlePopoverClose}
-                      sx={{ textDecoration: "none", color: "#759F98", fontSize: "small",mr:2, mt:50 }}>
+                      sx={{ textDecoration: "none", color: "#759F98", fontSize: "small",mr:2, mt:4 }}>
                       Welcom, {token} 님
                     </Link>
+                    </Button>
+                    
                     {mouseOn?
                     <Container
-                      style={{ position: 'absolute', top: 70 }}>
+                      style={{ position: 'absolute', top: 80 }}>
                       <Box 
                         display="flex" justifyContent="center" 
                         sx={{

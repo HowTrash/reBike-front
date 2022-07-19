@@ -1,10 +1,13 @@
 import * as React from "react";
 import axios from "axios";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useCookies } from "react-cookie";
 import PriorityHighIcon from "@mui/icons-material/PriorityHigh";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import {
   Divider,
+  FormControlLabel,
+  Checkbox,
   Button,
   CssBaseline,
   TextField,
@@ -16,6 +19,7 @@ import {
   Modal,
   Backdrop,
 } from "@mui/material";
+import { fontFamily } from "@mui/system";
 
 const style = {
   position: "absolute",
@@ -73,6 +77,29 @@ function Login() {
   const [open, setOpen] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+  //쿠키 및 체크박스 기억
+  const [cookies, setCookie, removeCookie] = useCookies(["rememberUserId"]);
+  const [isRemember, setIsRemember] = useState(false);
+
+  // 최초 렌더링 시
+  useEffect(() => {
+    /*저장된 쿠키값이 있으면, CheckBox TRUE 및 UserID에 값 셋팅*/
+    if (cookies.rememberUserId !== undefined) {
+      setEmail(cookies.rememberUserId);
+      setIsRemember(true);
+    }
+  }, []);
+
+  //쿠키 핸들
+  const handleOnCookie = (e) => {
+    setIsRemember(e.target.checked);
+    if (!e.target.checked) {
+      removeCookie("rememberUserId");
+    } else {
+      setCookie("rememberUserId", email, { maxAge: 180 }); //시간 설정 30 초
+    }
+  };
 
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -184,17 +211,59 @@ function Login() {
               >
                 Login
               </Button>
-              <Typography align="right">
-                <Link
-                  href="/register"
-                  style={{
-                    textDecoration: "none",
-                    fontWeight: "bold",
+              <Box
+                sx={{
+                  display: "flex",
+                  alignItems: "flex-end",
+                  flexDirection: "column",
+                }}
+              >
+                <FormControlLabel
+                  sx={{ mr: -0.5 }}
+                  control={
+                    <Checkbox
+                      defaultChecked
+                      size="small"
+                      sx={{
+                        mr: -1,
+                        color: "#759F98",
+                      }}
+                    />
+                  }
+                  label={
+                    <Typography
+                      style={{ color: "#759F98", fontWeight: "bold" }}
+                    >
+                      아이디 저장
+                    </Typography>
+                  }
+                  checked={isRemember}
+                  onChange={(e) => {
+                    handleOnCookie(e);
                   }}
-                >
-                  가입하기
-                </Link>
-              </Typography>
+                />
+                {/* <input
+                  type="checkbox"
+                  id="saveId"
+                  name="saveId"
+                  onChange={(e) => {
+                    handleOnCookie(e);
+                  }}
+                  checked={isRemember}
+                /> */}
+
+                <Typography align="right">
+                  <Link
+                    href="/register"
+                    style={{
+                      textDecoration: "none",
+                      fontWeight: "bold",
+                    }}
+                  >
+                    가입하기
+                  </Link>
+                </Typography>
+              </Box>
               <Divider sx={{ color: "lightgrey" }}>또는</Divider>
               <KakaoLoginBtn
                 variant="outlined"

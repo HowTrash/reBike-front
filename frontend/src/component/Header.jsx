@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect} from 'react';
 import {Button, Container, Box, Link,CssBaseline, Hidden, Typography} from '@mui/material';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import lottie from 'react-lottie-web'
+import lottie from 'lottie-web'
 
 const theme = createTheme({
     palette: {
@@ -20,7 +20,7 @@ const theme = createTheme({
     renderer: 'svg',
     loop: false,
     autoplay:true,
-    animationData:require("../images/rebikeLogoLottie2.json")
+    animationData:require("../images/LottieLogo.json")
     })
 
  },[])
@@ -72,9 +72,7 @@ function Header() {
                   alignItems="flex-end"
                   marginLeft= "auto"
               >
-                  <Link href="/mainpage" sx={{textDecoration: 'none',fontSize : 30, color : "black", fontWeight: 'bold',mb:1,position: 'absolute',left: 55 ,fontFamily :'./font/NanumGothic-Bold.ttf'}}>
-                      HOWTRASH
-                  </Link>
+                  <GetLogoLottie />
 
                   {token ?(
                   // if IsLogin is true
@@ -84,12 +82,12 @@ function Header() {
                       href="/login"
                       onClick={deleteToken}
                       onMouseEnter={handlePopoverOpen} onMouseLeave={handlePopoverClose}
-                      sx={{ textDecoration: "none", color: "#759F98", fontSize: "small",mr:2 }}>
+                      sx={{ textDecoration: "none", color: "#759F98", fontSize: "small",mr:2, mt:50 }}>
                       Welcom, {token} 님
                     </Link>
                     {mouseOn?
                     <Container
-                      style={{ position: 'absolute', top: 55 }}>
+                      style={{ position: 'absolute', top: 70 }}>
                       <Box 
                         display="flex" justifyContent="center" 
                         sx={{
@@ -104,7 +102,7 @@ function Header() {
                     
                     <Button
                       variant="contained"
-                      sx={{fontWeight: 'bold',mt:2,mb : 2,mr:2, color:'white',backgroundColor : "#759F98"}}>
+                      sx={{fontWeight: 'bold',mt:6,mb : 2,mr:2, color:'white',backgroundColor : "#759F98"}}>
                     <Link href= '/mypage' sx={{textDecoration: 'none', color : "white"}}>MyPage</Link>
                     </Button>
                     
@@ -113,7 +111,7 @@ function Header() {
                   : (// if IsLogin is false
                   <Button
                       variant="contained"
-                      sx={{fontWeight: 'bold' ,mb : 2,color:'white',backgroundColor : "#759F98"}}>
+                      sx={{fontWeight: 'bold' ,mt: 6, mb : 2,color:'white',backgroundColor : "#759F98"}}>
                     <Link href= '/login' sx={{textDecoration: 'none', color : "white"}}>Login</Link>
                   </Button>
                   )}

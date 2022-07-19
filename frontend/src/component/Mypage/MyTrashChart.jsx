@@ -6,6 +6,7 @@ import {
 
 } from "@mui/material";
 import Chart from "../chart/Chart";
+import Date from "../chart/Date";
 
 function MyTrashcan() {
     return(
@@ -24,10 +25,9 @@ function MyTrashcan() {
                     style={{
                         borderRadius: 8,
                         backgroundColor: "white",
-                        height: "50vh"}}>
-                            <Typography color="black" textAlign="center" sx={{mb: 2,fontSize: "15px",paddingTop:2}}>
-                                2022-07-18 ~ 2022-07-25
-                            </Typography>
+                        height: "50vh"}}
+                        sx={{mt:3}}>
+                            <Date/>
                                <Chart/>    
                 </Container>
         </Container>

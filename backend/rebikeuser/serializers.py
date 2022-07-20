@@ -17,16 +17,19 @@ class UserSerializer(serializers.ModelSerializer):
 class UserSignupResponse(serializers.ModelSerializer):
     class Meta:
         model = user
-        fields = ['id']  # 프론트에주는 값
+        fields = ['name']  # 프론트에주는 값
 
 
 class SignupInput(serializers.ModelSerializer):
     # 검증부
-    email = serializers.EmailField()
-    pw = serializers.CharField(max_length=60)
-    alias = serializers.CharField(max_length=20)
-    name = serializers.CharField(max_length=20)
+    class Meta:
+        model = user
+        fields = ['email', 'pw', 'alias', 'name']
+
+
+class AutoUpload(serializers.ModelSerializer):
+    save_img = serializers.IntegerField(default=1)
 
     class Meta:
         model = user
-        fields = ['name', 'pw', 'alias', 'email']  # 실제 response할 필드
+        fields = ['save_img']

@@ -1,5 +1,6 @@
 from pathlib import Path
 
+
 ####환경변수 설정
 import os
 import environ
@@ -18,7 +19,12 @@ environ.Env.read_env(
     env_file=os.path.join(BASE_DIR, '.env')
 )
 
-SECRET_KEY = env('SECRET_KEY')
+if not env('IS_DEV'):
+    SECRET_KEY = env('SECRET_KEY')
+    DB_URL = 'localhost:8989'
+else:
+    SECRET_KEY = env('SECRET_KEY')
+    DB_URL = env('DATABASE_URL')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = env('DEBUG')
@@ -36,10 +42,11 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     # add
     'rest_framework',
+    'corsheaders',
+    'drf_yasg',
     # local apps
     'rebikeuser',
     'rebiketrash',
-    'corsheaders',
 ]
 
 MIDDLEWARE = [
@@ -80,7 +87,10 @@ WSGI_APPLICATION = 'backend.wsgi.application'
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
 DATABASES = {
-    'default': env.db()
+    'default': env.db(),
+    'OPTIONS': {
+        'init_command': "SET sql_mode='STRICT_TRANS_TABLES'"
+    }
 }
 
 # Password validation
@@ -110,7 +120,7 @@ TIME_ZONE = 'Asia/Seoul'
 
 USE_I18N = True
 
-USE_TZ = True
+USE_TZ = False
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.0/howto/static-files/

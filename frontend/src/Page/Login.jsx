@@ -221,7 +221,6 @@ function Login() {
                   sx={{ mr: -0.5 }}
                   control={
                     <Checkbox
-                      defaultChecked
                       size="small"
                       sx={{
                         mr: -1,

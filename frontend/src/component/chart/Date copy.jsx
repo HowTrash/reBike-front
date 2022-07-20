@@ -1,5 +1,6 @@
 import * as React from 'react';
-import {Typography,Button, Grid} from '@mui/material';
+import useState from 'react';
+import {Typography,Button, Grid,Box} from '@mui/material';
 import TextField from '@mui/material/TextField';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
@@ -18,24 +19,20 @@ function Dates() {
 const [StartDate, setStartDate] = React.useState(null);
 const [EndDate, setEndDate] = React.useState(null);
 
-const handleStartChange = (date) => {
-  setStartDate(date.getFullYear() + '-' + (date.getMonth() + 1).toString().padStart(2, '0') + '-' + date.getDate().toString().padStart(2, '0'));
+const handleStartChange = (Start) => {
+  setStartDate(Start.toLocaleDateString());
 };
 
-const handleEndChange = (date) => {
-  setEndDate(date.getFullYear() + '-' + (date.getMonth() + 1).toString().padStart(2, '0') + '-' + date.getDate().toString().padStart(2, '0'));
+const handleEndChange = (End) => {
+  setEndDate(End.toLocaleDateString());
 };
 
-const handleSubmit = (data) => {
-  data.preventDefault();
+const handleSubmit = (e) => {
+  e.preventDefault();
   console.log(StartDate);
   console.log(EndDate);
-  const SubmitData = {
-    startdate: StartDate,
-    enddate: EndDate,
-  };
-  const {startdate,enddate} = SubmitData;
 };
+
 
   return (
     <ThemeProvider theme={theme}>

@@ -20,19 +20,17 @@ const [StartDate, setStartDate] = React.useState(null);
 const [EndDate, setEndDate] = React.useState(null);
 
 const handleStartChange = (Start) => {
-  setStartDate(Start);
-  console.log(Start.toDateString());
+  setStartDate(Start.toLocaleDateString());
 };
 
 const handleEndChange = (End) => {
- setEndDate(End);
-  console.log(End.toDateString());
+  setEndDate(End.toLocaleDateString());
 };
 
 const handleSubmit = (e) => {
   e.preventDefault();
-  console.log(StartDate.toDateString());
-  console.log(EndDate.toDateString());
+  console.log(StartDate);
+  console.log(EndDate);
 };
 
 

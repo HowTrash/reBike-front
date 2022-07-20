@@ -87,7 +87,6 @@ function MyTrashcan() {
 
     useEffect(() => {
         console.log("정보 저장",trash) 
-        console.log("정보 저장2",trash[0]?.img)
     }, [trash]);
     
    
@@ -164,7 +163,10 @@ function MyTrashcan() {
                                         justifyContent: "space-evenly"
                                     }}
                                     >
-                                        <MultiActionAreaCard image={trash[0].img}/>
+                                        {trash?.map((content, index)=>(
+                                            <MultiActionAreaCard image={content.img} key={index}/>
+                                        ))}
+                                        
                                         {/* <MultiActionAreaCard /> */}
 
                                 </Box>

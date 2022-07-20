@@ -146,8 +146,6 @@ function Login() {
                 </Container>
             </ThemeProvider>
         </Container>
-      </ThemeProvider>
-    </Container>
   );
 }
 

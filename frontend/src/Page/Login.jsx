@@ -4,45 +4,59 @@ import axios from "axios";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { Divider, Button, CssBaseline, TextField, Box, Typography, Container, Link, styled,} from "@mui/material";
 
+const style = {
+  position: "absolute",
+  top: "25%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
+  width: 400,
+  bgcolor: "background.paper",
+  borderRadius: 3,
+  boxShadow: 24,
+  p: 4,
+  display: "flex",
+  flexDirection: "column",
+  alignItems: "center",
+};
+
 const theme = createTheme({
-    palette: {
-        primary: {
-            main: "#759F98",
-        },
+  palette: {
+    primary: {
+      main: "#759F98",
     },
+  },
 });
 
 const UserInfoTf = styled(TextField)(({}) => ({
-    "&:hover": {
-        color: "#759F98",
+  "&:hover": {
+    color: "#759F98",
+  },
+  "& .MuiOutlinedInput-root": {
+    "&:hover fieldset": {
+      borderColor: "#759F98",
     },
-    "& .MuiOutlinedInput-root": {
-        "&:hover fieldset": {
-            borderColor: "#759F98",
-        },
-    },
+  },
 }));
 
 const KakaoLoginBtn = styled(Button)(({}) => ({
-    backgroundColor: "white",
-    "&:hover": {
-        color: "yellow",
-        backgroundColor: "#F1DC2C",
-        borderColor: "#F1DC2C",
-    },
+  backgroundColor: "white",
+  "&:hover": {
+    color: "yellow",
+    backgroundColor: "#F1DC2C",
+    borderColor: "#F1DC2C",
+  },
 }));
 
 const NaverLoginBtn = styled(Button)(({}) => ({
-    backgroundColor: "white",
-    "&:hover": {
-        color: "#6AED64",
-        backgroundColor: "#54B94E",
-        borderColor: "#54B94E",
-    },
+  backgroundColor: "white",
+  "&:hover": {
+    color: "#6AED64",
+    backgroundColor: "#54B94E",
+    borderColor: "#54B94E",
+  },
 }));
 
 function Login() {
-
     const handleSubmit = (event) => {
         event.preventDefault();
         
@@ -132,7 +146,9 @@ function Login() {
                 </Container>
             </ThemeProvider>
         </Container>
-    );
+      </ThemeProvider>
+    </Container>
+  );
 }
 
 export default Login;

@@ -1,15 +1,24 @@
-import * as React from 'react';
-import { Button, CardActionArea, CardActions,Card,CardMedia,Typography,styled } from '@mui/material';
+import * as React from "react";
+import {
+  Button,
+  CardActionArea,
+  CardActions,
+  Card,
+  CardMedia,
+  Typography,
+  styled,
+} from "@mui/material";
 
 const MyTrashcanBtn = styled(Button)(({}) => ({
-    backgroundColor: "#76F2BE",
+  backgroundColor: "#76F2BE",
+  borderColor: "#76F2BE",
+  "&:hover": {
+    color: "black",
+    backgroundColor: "white",
     borderColor: "#76F2BE",
-    "&:hover": {
-        color:"black",
-        backgroundColor: "white",
-        borderColor: "#76F2BE",
-    },
+  },
 }));
+
 
 export default function MultiActionAreaCard({image}) {
     // export default function MultiActionAreaCard() {

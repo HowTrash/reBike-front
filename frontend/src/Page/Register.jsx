@@ -91,10 +91,10 @@ function Register() {
 
     const data = new FormData(e.currentTarget);
     const joinData = {
-      email: data.get("email"),
       name: data.get("name"),
-      password: data.get("password"),
-      rePassword: data.get("rePassword"),
+      pw: data.get("password"),
+      alias: data.get("nickname"),
+      email: data.get("email"),
     };
     const { email, name, password, rePassword } = joinData;
 
@@ -130,12 +130,7 @@ function Register() {
       nameRegex.test(name)
     ) {
       axios
-        .post("http://localhost:8080/user/signup/", {
-          name: data.get("name"),
-          pw: data.get("password"),
-          alias: "ahaaha",
-          email: data.get("email"),
-        })
+        .post("http://localhost:8080/user/signup/", joinData)
         .then((response) => {
           // Handle success.
           handleOpen();
@@ -238,6 +233,17 @@ function Register() {
                 error={nameError !== "" || false}
               />
               <FormHelperTexts>{nameError}</FormHelperTexts>
+
+              <UserInfoTf
+                margin="normal"
+                required
+                fullWidth
+                name="nickname"
+                label="nickname"
+                type="nickname"
+                id="nickname"
+              />
+
               <React.Fragment>
                 <Button
                   type="submit"

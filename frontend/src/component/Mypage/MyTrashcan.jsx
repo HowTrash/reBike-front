@@ -1,13 +1,9 @@
-import * as React from "react";
+import { useState, useEffect} from 'react';
 import { alpha, createTheme } from "@mui/material/styles";
-import {
-    Box,
-    Typography,
-    Container,
-    styled,
-    Switch,
-} from "@mui/material";
+import { Box,Typography,Container,styled,Switch,} from "@mui/material";
 import MultiActionAreaCard from "./MultiActionAreaCard";
+import Api from "../../utils/customApi";
+import { API_BASE_URL} from  "../../utils/constants";
 
 
 const GreenSwitch = styled(Switch)(({ theme }) => ({
@@ -22,7 +18,30 @@ const GreenSwitch = styled(Switch)(({ theme }) => ({
     },
   }));
 
+
+
 function MyTrashcan() {
+
+    const token = localStorage.getItem("access_token");
+    console.log(token);
+
+    const [trash, setTrash] = useState([])
+    
+    const fetchMyTrash = async () => {
+        const res = await fetch(
+            `${API_BASE_URL}/trash/mypage/users/${token}/images`,
+            { method: 'GET' },
+        );
+        const result = (await res.json())
+        setTrash(trash ? [...trash, ...result.content] : result.content)
+    }
+
+    useEffect(() => {
+        if (token !== '') {
+            fetchMyTrash();
+        }
+      }, []);
+
     return(
         <Container
             style={{

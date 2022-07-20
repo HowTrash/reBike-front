@@ -77,7 +77,6 @@ function Header() {
 
                   {token ?(
                   // if IsLogin is true
-                  
                   <div>
                     <Button>
                       <Link

@@ -1,17 +1,28 @@
-import * as React from 'react';
-import { Button, CardActionArea, CardActions,Card,CardMedia,Typography,styled } from '@mui/material';
+import * as React from "react";
+import {
+  Button,
+  CardActionArea,
+  CardActions,
+  Card,
+  CardMedia,
+  Typography,
+  styled,
+} from "@mui/material";
 
 const MyTrashcanBtn = styled(Button)(({}) => ({
-    backgroundColor: "#76F2BE",
+  backgroundColor: "#76F2BE",
+  borderColor: "#76F2BE",
+  "&:hover": {
+    color: "black",
+    backgroundColor: "white",
     borderColor: "#76F2BE",
-    "&:hover": {
-        color:"black",
-        backgroundColor: "white",
-        borderColor: "#76F2BE",
-    },
+  },
 }));
 
-export default function MultiActionAreaCard() {
+
+export default function MultiActionAreaCard({image}) {
+    // export default function MultiActionAreaCard() {
+
   return (
     <Card 
         sx={{ maxWidth: 200, border: 1, margin:2  }}>
@@ -19,12 +30,14 @@ export default function MultiActionAreaCard() {
             <CardMedia
                 component="img"
                 height="170"
-                image='https://picsum.photos/400/300'
+                // image='https://picsum.photos/400/300'
+                image={image}
                 style={{padding:3, borderRadius:8}}
             />
             <Typography 
                 fontWeight={"bold"} fontSize={20} component="div" marginTop={1} align="center">
                 물병
+                {/* {kind} */}
             </Typography>      
         </CardActionArea>
         <CardActions >

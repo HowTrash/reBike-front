@@ -20,8 +20,9 @@ const [StartDate, setStartDate] = React.useState(null);
 const [EndDate, setEndDate] = React.useState(null);
 
 const handleStartChange = (Start) => {
-  setStartDate(Start);
+  setStartDate(Start.toDateString());
   console.log(Start.toDateString());
+  console.log(StartDate);
 };
 
 const handleEndChange = (End) => {
@@ -29,10 +30,13 @@ const handleEndChange = (End) => {
   console.log(End.toDateString());
 };
 
-const handleSubmit = (e) => {
+const handleSubmit = (e,Start,End) => {
   e.preventDefault();
-  console.log(StartDate.toDateString());
-  console.log(EndDate.toDateString());
+  const data = new FormData(e.currentTarget);
+  console.log({
+    StartDate: data.get(Start),
+    EndDate: data.get(End),
+});
 };
 
 
@@ -55,6 +59,7 @@ const handleSubmit = (e) => {
           inputFormat="yyyy/MM/dd"
           value={StartDate}
           onChange={handleStartChange}
+          useWeekdaysShort={true}
           renderInput={(params) => <TextField size="small" {...params} sx={{width: '35%'}} />}
         />
          <Typography color="black" fontWeight="bold" sx={{fontSize: "medium", mx: 2}}>to</Typography>

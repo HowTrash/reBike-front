@@ -1,13 +1,9 @@
-import * as React from "react";
+import { useState, useEffect, useRef} from 'react';
 import { alpha, createTheme } from "@mui/material/styles";
-import {
-    Box,
-    Typography,
-    Container,
-    styled,
-    Switch,
-} from "@mui/material";
+import { Box,Typography,Container,styled,Switch,} from "@mui/material";
 import MultiActionAreaCard from "./MultiActionAreaCard";
+import Api from "../../utils/customApi";
+import lottie from 'lottie-web'
 
 
 const GreenSwitch = styled(Switch)(({ theme }) => ({
@@ -22,7 +18,80 @@ const GreenSwitch = styled(Switch)(({ theme }) => ({
     },
   }));
 
+  const GetNoTrashLottie = ()=>{
+    //lottie
+    const nocontainer = useRef();
+    useEffect(()=>{
+    lottie.loadAnimation({
+    container: nocontainer.current,
+    renderer: 'svg',
+    loop: false,
+    autoplay:true,
+    animationData:require("../../../src/images/noTrashLottie.json")
+    })
+
+ },[])
+   return(
+    <Container
+        display="flex"
+        flexDirection="column"
+        justifyContent="center"
+        alignItems="center"
+        style={{margin:100,}}>
+            <Box
+                ref={nocontainer}
+                sx={{size:"small", height:200}}>
+            </Box>
+            <Typography
+                justifyContent="center"
+                textAlign="center"
+                sx={{marginTop:5,  fontSize:12}}>
+                쓰레기를 사진을 업로드 해보세요.
+            </Typography>
+
+       </Container>
+
+       
+   )
+}
+
+
+
+
 function MyTrashcan() {
+
+    const token = localStorage.getItem("access_token");
+    console.log(token);
+
+    const [trash, setTrash] = useState([])
+
+    const fetchMyTrash = async () => {
+        const result = await Api.get('/trash/mypage/users/173dc2de-7076-40cf-a211-f3eca7aa9b4d/images').then(
+            res => res.data
+        )
+        setTrash(result);
+        console.log("api요청 결과",result)
+        // console.log("api요청 결과",result.length)
+
+        // console.log("api요청 결과 아이디?",result[0].img)
+        // console.log("정보 저장",trash)
+    }
+
+
+
+    useEffect(() => {
+        if (token !== '') {
+            fetchMyTrash();
+        }
+      }, []);
+
+    useEffect(() => {
+        console.log("정보 저장",trash) 
+    }, [trash]);
+    
+   
+
+
     return(
         <Container
             style={{
@@ -74,21 +143,37 @@ function MyTrashcan() {
                         borderColor: "white",
                         height: "100vh",
                         pt:2, pb:2}}>
-                        <Box
-                            sx={{
-                                display: "flex",
-                                flexWrap: "wrap",
-                                alignItems: "center",
-                                justifyContent: "space-evenly"
-                            }}>
-                            <MultiActionAreaCard />
-                            <MultiActionAreaCard />
-                            <MultiActionAreaCard />
-                            <MultiActionAreaCard />
-                            <MultiActionAreaCard />
-                            <MultiActionAreaCard />
+                            {
+                                trash.length === 0 ? (
+                                    <Box
+                                    sx={{
+                                        display: "flex",
+                                        flexWrap: "wrap",
+                                        alignItems: "center",
+                                        justifyContent: "space-evenly"
+                                    }}>
+                                        <GetNoTrashLottie />
+                                    </Box>
+                                ):
+                                (<Box
+                                    sx={{
+                                        display: "flex",
+                                        flexWrap: "wrap",
+                                        alignItems: "center",
+                                        justifyContent: "space-evenly"
+                                    }}
+                                    >
+                                        {trash?.map((content, index)=>(
+                                            <MultiActionAreaCard image={content.img} key={index}/>
+                                        ))}
+                                        
+                                        {/* <MultiActionAreaCard /> */}
 
-                        </Box>                                                
+                                </Box>
+                                )
+                            }
+                            
+
                 </Container>
             
         </Container>

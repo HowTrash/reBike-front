@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { BrowserRouter, BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
 import Login from "./Page/Login";
 import MyPage from "./Page/MyPage";
@@ -8,27 +8,27 @@ import Header from "./component/Header";
 import Register from "./Page/Register";
 import Howto from "./Page/Howto";
 
-import { ReactComponent as GreenBack } from "./images/greenBack.svg";
+import GreenBack from "./images/greenBack";
 import MyTrashcan from "./component/Mypage/MyTrashcan";
 import MyTrashChart from "./component/Mypage/MyTrashChart";
 import ChangeInfo from "./component/Mypage/ChangeInfo";
 import SearchResult from "./component/mainpage/SearchResult";
 
-function IsLogin(access_token){
-    const [login, setLogin] = useState(false);
-    console.log("왜 안됨?")
+// function IsLogin(access_token){
+//     const [login, setLogin] = useState(false);
+//     console.log("왜 안됨?")
 
-    useEffect(()=>{
-        if(localStorage.getItem({access_token}) !== null){
-            console.log("로그인 on", setLogin)
-        }else{
-            setLogin(false);
-            console.log("로그인 off", setLogin)
-        }
-    }, [])
+//     useEffect(()=>{
+//         if(localStorage.getItem({access_token}) !== null){
+//             console.log("로그인 on", setLogin)
+//         }else{
+//             setLogin(false);
+//             console.log("로그인 off", setLogin)
+//         }
+//     }, [])
 
-    return login
-}
+//     return login
+// }
 
 
 function App() {
@@ -40,20 +40,21 @@ function App() {
             <Router>
             <Header />
                 <Routes>
-                    <Route path="/login" element={<Login />} />
-                    <Route path="/mainpage" element={<MainPage />} />
-                    <Route path="/howto" element={(<Howto />)} />
-                    <Route path="/register" element={<Register />} />
-                    <Route path="/mainpage/resultpage" element={<SearchResult/>}/>
-                    <Route path="/mypage" element={<MyPage />}>
-                        <Route index element={<MyTrashcan />} />
-                        <Route path='/mypage/myTrashChart' element={<MyTrashChart />} />
-                        <Route path='/mypage/userInfo' element={<ChangeInfo />} />
-                        <Route path='/mypage/logout' element={<MyTrashcan />} />
-                    </Route>
-                    
+                        <Route path="/login" element={<Login />} />
+                        <Route path="/mainpage" element={<MainPage />} />
+                        <Route path="/howto" element={(<Howto />)} />
+                        <Route path="/register" element={<Register />} />
+                        <Route path="/mainpage/resultpage" element={<SearchResult/>}/>
+                        <Route path="/mypage" element={<MyPage />}>
+                            <Route index element={<MyTrashcan />} />
+                            <Route path='/mypage/myTrashChart' element={<MyTrashChart />} />
+                            <Route path='/mypage/userInfo' element={<ChangeInfo />} />
+                            <Route path='/mypage/logout' element={<MyTrashcan />} />
+                        </Route>
+                        
 
-                </Routes>
+                    </Routes>
+                
             </Router>
         </div>
         

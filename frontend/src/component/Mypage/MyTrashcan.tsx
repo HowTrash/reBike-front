@@ -65,12 +65,12 @@ function MyTrashcan(props: TrashList) {
         const result= await Api.get('/trash/mypage/users/e1be84fa-4726-4916-8356-d7151f7be5a9/images').then(
             res => res.data as TrashList
         )
-        setTrashes(trashes? [...trashes, ...result.trashList]: result.trashList);
+        setTrashes(trashes ? [...trashes, ...result.trashList]:result.trashList);
         console.log("api요청 결과",result)
         // console.log("api요청 결과",result.length)
-
+?[]
         // console.log("api요청 결과 아이디?",result[0].img)
-        // console.log("정보 저장",trash)
+        console.log("정보 저장1",trashes)
     }
 
 
@@ -82,7 +82,7 @@ function MyTrashcan(props: TrashList) {
       }, []);
 
     useEffect(() => {
-        console.log("정보 저장",trashes) 
+        console.log("정보 저장2",trashes) 
     }, [trashes]);
     
    
@@ -140,7 +140,7 @@ function MyTrashcan(props: TrashList) {
                         height: "100vh",
                         paddingTop:2, paddingBottom:2}}>
                             {
-                                trashes.length === 0 ? (
+                                trashes ? (
                                     <Box
                                     sx={{
                                         display: "flex",
@@ -166,11 +166,10 @@ function MyTrashcan(props: TrashList) {
                                         justifyContent: "space-evenly"
                                     }}
                                     >
-                                        {trashes?.map((item: TrashList.trashList, index)=>(
+                                        {/* {trashes?.map((item: Trash, index: any)=>(
                                             <MultiActionAreaCard image={item.img} kind={item.trash_kind} key={index}/>
-                                        ))}
+                                        ))} */}
                                         
-                                        {/* <MultiActionAreaCard /> */}
                                 </Box>
                                 )
                             }

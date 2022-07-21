@@ -16,7 +16,7 @@ import {
   Link,
   styled,
 } from "@mui/material";
-import { ReactComponent as TrashCan } from "../../src/images/trashcan.svg";
+import TrashCan from "../images/trashcan";
 
 const style = {
   position: "absolute",
@@ -78,7 +78,14 @@ const FormHelperTexts = styled(FormHelperText)`
   font-size: 16px;
 `;
 
-function Register() {
+interface JoinData {
+  email : string;
+  name : string;
+  password : string;
+  rePassword : string;
+}
+
+function Register({email,name,password,rePassword }: JoinData) {
   const [emailError, setEmailError] = useState("");
   const [passwordState, setPasswordState] = useState("");
   const [passwordError, setPasswordError] = useState("");
@@ -86,7 +93,7 @@ function Register() {
   const [registerError, setRegisterError] = useState("");
 
   //form 비교
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: any) => {
     e.preventDefault();
 
     const data = new FormData(e.currentTarget);
@@ -96,7 +103,6 @@ function Register() {
       alias: data.get("nickname"),
       email: data.get("email"),
     };
-    const { email, name, password, rePassword } = joinData;
 
     // 이메일 유효성 체크
     const emailRegex =
@@ -107,7 +113,7 @@ function Register() {
 
     // 비밀번호 유효성 체크
     const passwordRegex = /^[가-힣a-zA-Z]+$/;
-    if (!passwordRegex.test(password))
+    if (!passwordRegex.test(password as string))
       setPasswordState("비밀번호를 입력해주세요!");
     else setPasswordState("");
 
@@ -118,16 +124,16 @@ function Register() {
 
     // 이름 유효성 검사
     const nameRegex = /^[가-힣a-zA-Z]+$/;
-    if (!nameRegex.test(name) || name.length < 1)
+    if (!nameRegex.test(name as string) || name.length < 1)
       setNameError("올바른 이름을 입력해주세요.");
     else setNameError("");
 
     // 모두 통과되면 완료출력
     if (
-      emailRegex.test(email) &&
+      emailRegex.test(email as string) &&
       passwordRegex.test(password) &&
       password === rePassword &&
-      nameRegex.test(name)
+      nameRegex.test(name as string)
     ) {
       axios
         .post("http://localhost:8080/user/signup/", joinData)

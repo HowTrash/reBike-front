@@ -56,7 +56,7 @@ const NaverLoginBtn = styled(Button)(({}) => ({
   },
 }));
 
-function Login() {
+export default function Login() {
     const handleSubmit = (event: any) => {
         event.preventDefault();
         
@@ -148,5 +148,3 @@ function Login() {
         </Container>
   );
 }
-
-export default Login;

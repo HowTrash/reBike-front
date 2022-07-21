@@ -57,7 +57,7 @@ const NaverLoginBtn = styled(Button)(({}) => ({
 }));
 
 function Login() {
-    const handleSubmit = (event) => {
+    const handleSubmit = (event: any) => {
         event.preventDefault();
         
         const data = new FormData(event.currentTarget);

@@ -7,12 +7,12 @@ import MainPage from "./Page/MainPage";
 import Header from "./component/Header";
 import Register from "./Page/Register";
 import Howto from "./Page/Howto";
-
-import { ReactComponent as GreenBack } from "./images/greenBack.svg";
 import MyTrashcan from "./component/Mypage/MyTrashcan";
 import MyTrashChart from "./component/Mypage/MyTrashChart";
 import ChangeInfo from "./component/Mypage/ChangeInfo";
 import SearchResult from "./component/mainpage/SearchResult";
+import GreenBack from "./images/greenBack";
+
 
 function IsLogin(access_token){
     const [login, setLogin] = useState(false);

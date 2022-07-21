@@ -20,7 +20,7 @@ const MyTrashcanBtn = styled(Button)(({}) => ({
 }));
 
 
-export default function MultiActionAreaCard({image}) {
+export default function MultiActionAreaCard({image='',kind='' }) {
     // export default function MultiActionAreaCard() {
 
   return (
@@ -36,8 +36,8 @@ export default function MultiActionAreaCard({image}) {
             />
             <Typography 
                 fontWeight={"bold"} fontSize={20} component="div" marginTop={1} align="center">
-                물병
-                {/* {kind} */}
+                {/* 물병 */}
+                {kind}
             </Typography>      
         </CardActionArea>
         <CardActions >

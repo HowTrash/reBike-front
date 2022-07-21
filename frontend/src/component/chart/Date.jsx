@@ -5,6 +5,7 @@ import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import {DatePicker} from '@mui/x-date-pickers/DatePicker';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import axios from 'axios';
 
 const theme = createTheme({
   palette: {
@@ -17,24 +18,37 @@ const theme = createTheme({
 function Dates() {
 const [StartDate, setStartDate] = React.useState(null);
 const [EndDate, setEndDate] = React.useState(null);
+const [UserData, setUserData] = React.useState(null);
 
-const handleStartChange = (date) => {
+const HandleStartChange = (date) => {
   setStartDate(date.getFullYear() + '-' + (date.getMonth() + 1).toString().padStart(2, '0') + '-' + date.getDate().toString().padStart(2, '0'));
 };
 
-const handleEndChange = (date) => {
+const HandleEndChange = (date) => {
   setEndDate(date.getFullYear() + '-' + (date.getMonth() + 1).toString().padStart(2, '0') + '-' + date.getDate().toString().padStart(2, '0'));
 };
 
-const handleSubmit = (data) => {
-  data.preventDefault();
+const HandleSubmit = (event) => {
+  event.preventDefault();
   console.log(StartDate);
   console.log(EndDate);
-  const SubmitData = {
-    startdate: StartDate,
-    enddate: EndDate,
-  };
-  const {startdate,enddate} = SubmitData;
+  {
+    axios
+      .get(`http://localhost:8080/trash/mypage/users/8baaa9ae-28a5-4840-be1e-f5d0b1b6c90b/statistics/period/${StartDate}/${EndDate}`)
+      .then((response) => {
+        // Handle success.
+        setUserData(response.data);
+        console.log("Well done!");
+        UserData.map((datas) => {
+          console.log(datas.cnt);
+          return UserData + 1;
+        }); // 저장된 데이터들 호출
+      })
+      .catch((error) => {
+        // Handle error.
+        console.log("An error occurred:", error.response);
+      });
+  }
 };
 
   return (
@@ -45,7 +59,7 @@ const handleSubmit = (data) => {
     justifyContent="center"
     alignItems="center"
     sx={{paddingTop:3}}
-    onSubmit={handleSubmit}
+    onSubmit={HandleSubmit}
     noValidate
     >
     <LocalizationProvider dateAdapter={AdapterDateFns}> 
@@ -55,7 +69,7 @@ const handleSubmit = (data) => {
           name="startDate"
           inputFormat="yyyy/MM/dd"
           value={StartDate}
-          onChange={handleStartChange}
+          onChange={HandleStartChange}
           renderInput={(params) => <TextField size="small" {...params} sx={{width: '35%'}} />}
         />
          <Typography color="black" fontWeight="bold" sx={{fontSize: "medium", mx: 2}}>to</Typography>
@@ -65,7 +79,7 @@ const handleSubmit = (data) => {
           name="endDate"
           inputFormat="yyyy/MM/dd"
           value={EndDate}
-          onChange={handleEndChange}
+          onChange={HandleEndChange}
           minDate={StartDate}
           renderInput={(params) => <TextField size="small" {...params}  sx={{width: '35%'}} />}
         />

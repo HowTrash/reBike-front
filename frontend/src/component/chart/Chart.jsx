@@ -4,7 +4,7 @@ class TrashChart extends PureComponent {
   static demoUrl = 'https://codesandbox.io/s/simple-bar-chart-tpz8r';
 
   render() {
-    
+
 const data = [
   {
     name: '종이', "쓰레기 수" : 20,

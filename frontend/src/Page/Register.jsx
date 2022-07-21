@@ -134,6 +134,7 @@ function Register() {
         .then((response) => {
           // Handle success.
           handleOpen();
+          console.log(response);
           console.log("Well done!");
           console.log("User profile", response.data.user);
           console.log("User token", response.data.jwt);

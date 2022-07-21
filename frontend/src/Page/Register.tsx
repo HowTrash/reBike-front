@@ -16,7 +16,14 @@ import {
   Link,
   styled,
 } from "@mui/material";
-import { ReactComponent as TrashCan } from "../../src/images/trashcan.svg";
+import TrashCan from "../images/trashcan";
+
+interface Props {
+  email: string;
+  name: string;
+  password: string;
+  rePassword: string
+}
 
 const style = {
   position: "absolute",
@@ -78,7 +85,8 @@ const FormHelperTexts = styled(FormHelperText)`
   font-size: 16px;
 `;
 
-function Register() {
+function Register({email ="", name="", password="", rePassword=""}: Props) {
+
   const [emailError, setEmailError] = useState("");
   const [passwordState, setPasswordState] = useState("");
   const [passwordError, setPasswordError] = useState("");
@@ -86,7 +94,7 @@ function Register() {
   const [registerError, setRegisterError] = useState("");
 
   //form 비교
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: React.ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
 
     const data = new FormData(e.currentTarget);
@@ -96,7 +104,7 @@ function Register() {
       alias: data.get("nickname"),
       email: data.get("email"),
     };
-    const { email, name, password, rePassword } = joinData;
+    // const { email, name, password, rePassword } = joinData;
 
     // 이메일 유효성 체크
     const emailRegex =

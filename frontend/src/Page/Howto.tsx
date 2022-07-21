@@ -1,7 +1,7 @@
 import * as React from "react";
 import {Box} from "@mui/material";
 import SearchBar from "../component/mainpage/SearchBar";
-import HowtoResult1 from "../component/howtopage/HowtoResult1";
+import HowtoResult from "../component/howtopage/HowtoResult";
 
 
 const Howto = () => {
@@ -9,7 +9,7 @@ const Howto = () => {
       <Box textAlign={"center"} >
         <div>
           <SearchBar />
-          <HowtoResult1/>
+          <HowtoResult />
         </div>
       </Box>
     );

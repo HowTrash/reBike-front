@@ -1,9 +1,10 @@
 import {Typography, Box} from "@mui/material";
-import FirstImg  from '../../../src/images/firstImg.svg';
-import SecondImg from '../../../src/images/secondImg.svg';
-import ThirdImg from '../../../src/images/thirdImg.svg';
-import TrashCardView from "../../component/mainpage/TrashCardView";
+import FirstImg  from 'src/images/firstImg';
+import SecondImg from 'src/images/secondImg';
+import ThirdImg from 'src/images/thirdImg';
+import TrashCardView from "./TrashCardView";
 import AutoGraphIcon from '@mui/icons-material/AutoGraph';
+import React from "react";
 
 
 function PopularTrash(){
@@ -20,15 +21,15 @@ function PopularTrash(){
 
             <Box  sx={{display : "flex", flexWrap : "wrap", justifyContent : "space-evenly"}}>
                 <Box sx={{p:2}}>
-                    <img src={FirstImg} /> 
+                    <FirstImg /> 
                     <TrashCardView />
                 </Box>
                 <Box sx={{p:2}}>
-                    <img src={SecondImg} />
+                    <SecondImg />
                     <TrashCardView />
                 </Box>
                 <Box sx={{p:2}}>
-                    <img src={ThirdImg} />
+                    <ThirdImg />
                     <TrashCardView /> 
                 </Box>    
             </Box>

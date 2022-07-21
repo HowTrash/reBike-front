@@ -4,6 +4,10 @@ import axios from "axios";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { Divider, Button, CssBaseline, TextField, Box, Typography, Container, Link, styled,} from "@mui/material";
 
+interface Props {
+
+}
+
 const style = {
   position: "absolute",
   top: "25%",
@@ -57,10 +61,10 @@ const NaverLoginBtn = styled(Button)(({}) => ({
 }));
 
 function Login() {
-    const handleSubmit = (event) => {
+    const handleSubmit = (event: React.ChangeEvent<HTMLInputElement>) => {
         event.preventDefault();
         
-        const data = new FormData(event.currentTarget);
+        const data = new FormData(event.target);
         console.log({
             event,
             name: data.get("name"),

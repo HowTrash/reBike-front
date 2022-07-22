@@ -11,6 +11,7 @@ import Howto from "./Page/Howto";
 import GreenBack from "./images/greenBack";
 import MyTrashcan from "./component/Mypage/MyTrashcan";
 import MyTrashChart from "./component/Mypage/MyTrashChart";
+import MyBadge from './component/Mypage/MyBadge';
 import ChangeInfo from "./component/Mypage/ChangeInfo";
 import SearchResult from "./component/mainpage/SearchResult";
 
@@ -48,6 +49,7 @@ function App() {
                         <Route path="/mypage" element={<MyPage />}>
                             <Route index element={<MyTrashcan />} />
                             <Route path='/mypage/myTrashChart' element={<MyTrashChart />} />
+                            <Route path='/mypage/myBadge' element={<MyBadge />} />
                             <Route path='/mypage/userInfo' element={<ChangeInfo />} />
                             <Route path='/mypage/logout' element={<MyTrashcan />} />
                         </Route>

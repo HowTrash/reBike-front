@@ -59,6 +59,8 @@ function MyTrashcan(props: TrashList) {
     const token = localStorage.getItem("access_token");
     console.log(token);
 
+    
+
     const [trashes, setTrashes] = useState(props)
 
     const fetchMyTrash = async () => {

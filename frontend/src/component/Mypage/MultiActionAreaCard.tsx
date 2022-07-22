@@ -7,6 +7,7 @@ import {
   CardMedia,
   Typography,
   styled,
+  Link
 } from "@mui/material";
 
 const MyTrashcanBtn = styled(Button)(({}) => ({
@@ -51,7 +52,11 @@ export default function MultiActionAreaCard({image='',kind='' }) {
                     bgcolor : "#76F2BE", 
                     borderColor:"#76F2BE",
                     color: "black"}}>
-                더보기
+                
+                <Link href= '/mypage/howTo'
+                  sx={{color: "black", textDecoration: "none"}}>
+                  더보기
+                </Link>
             </MyTrashcanBtn>
         </CardActions>
     </Card>

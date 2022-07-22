@@ -59,18 +59,18 @@ function MyTrashcan(props: TrashList) {
     const token = localStorage.getItem("access_token");
     console.log(token);
 
-    const [trashes, setTrashes] = useState(props.trashList)
+    const [trashes, setTrashes] = useState(props)
 
     const fetchMyTrash = async () => {
         const result= await Api.get('/trash/mypage/users/e1be84fa-4726-4916-8356-d7151f7be5a9/images').then(
             res => res.data as TrashList
         )
-        setTrashes(trashes ? [...trashes, ...result.trashList]:result.trashList);
+        // setTrashes(result);
+        setTrashes(result)
         console.log("api요청 결과",result)
-        // console.log("api요청 결과",result.length)
-?[]
+
         // console.log("api요청 결과 아이디?",result[0].img)
-        console.log("정보 저장1",trashes)
+        // console.log("정보 저장1",trashes)
     }
 
 
@@ -83,6 +83,8 @@ function MyTrashcan(props: TrashList) {
 
     useEffect(() => {
         console.log("정보 저장2",trashes) 
+        console.log("api요청 gilli",Object.keys(trashes).length)
+
     }, [trashes]);
     
    
@@ -140,14 +142,14 @@ function MyTrashcan(props: TrashList) {
                         height: "100vh",
                         paddingTop:2, paddingBottom:2}}>
                             {
-                                trashes ? (
+                                Object.keys(trashes).length === 0 ? (
                                     <Box
-                                    sx={{
-                                        display: "flex",
-                                        flexWrap: "wrap",
-                                        alignItems: "center",
-                                        justifyContent: "space-evenly"
-                                    }}>
+                                        sx={{
+                                            display: "flex",
+                                            flexWrap: "wrap",
+                                            alignItems: "center",
+                                            justifyContent: "space-evenly"
+                                        }}>
                                         <GetNoTrashLottie />
                                             <Typography
                                                 justifyContent="center"
@@ -166,9 +168,9 @@ function MyTrashcan(props: TrashList) {
                                         justifyContent: "space-evenly"
                                     }}
                                     >
-                                        {/* {trashes?.map((item: Trash, index: any)=>(
+                                        {Object.values(trashes)?.map((item: Trash, index: any)=>(
                                             <MultiActionAreaCard image={item.img} kind={item.trash_kind} key={index}/>
-                                        ))} */}
+                                        ))}
                                         
                                 </Box>
                                 )

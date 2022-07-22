@@ -21,23 +21,21 @@ const GreenSwitch = styled(Switch)(({ theme }) => ({
 
   const GetNoTrashLottie = ()=>{
     //lottie
-    const nocontainer = useRef();
     const element = useRef<HTMLDivElement>(null);
-
     useEffect(()=>{
     lottie.loadAnimation({
     container: element.current as HTMLDivElement,    
     renderer: 'svg',
     loop: false,
     autoplay:true,
-    animationData:require("../../../src/images/noTrashLottie.json")
+    animationData:require("../../images/noTrashLottie.json")
     })
 
  },[])
    return(
             <Box
-                ref={nocontainer}
-                sx={{size:"small", height:200}}>왜안뜨냐
+                ref={element}
+                style={{height:300}}>
             </Box>
    )
 }
@@ -140,8 +138,10 @@ function MyTrashcan() {
                                         sx={{
                                             display: "flex",
                                             flexWrap: "wrap",
+                                            flexDirection:"column",
                                             alignItems: "center",
-                                            justifyContent: "space-evenly"
+                                            justifyContent: "space-evenly",
+                                            marginTop:10
                                         }}>
                                         <GetNoTrashLottie />
                                             <Typography

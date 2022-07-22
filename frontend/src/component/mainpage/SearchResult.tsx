@@ -4,6 +4,7 @@ import { Box, Button, Typography } from "@mui/material";
 import InputIcon from "@mui/icons-material/Input";
 import { useLocation } from "react-router";
 
+
 const SearchResult = () => {
   const { state } = useLocation(); //이미지 주소
   return (
@@ -24,7 +25,7 @@ const SearchResult = () => {
             mt: 23,
           }}
         >
-          <img src={state} />
+          <img src ={state as string} />
         </Box>
 
         <Typography marginTop={5} fontWeight="bold" variant="h5">

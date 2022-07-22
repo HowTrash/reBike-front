@@ -18,42 +18,42 @@ const GreenSwitch = styled(Switch)(({ theme }) => ({
   },
 }));
 
-  const GetNoTrashLottie = ()=>{
-    //lottie
-    const nocontainer = useRef();
-    useEffect(()=>{
-    lottie.loadAnimation({
-    container: nocontainer.current,
-    renderer: 'svg',
-    loop: false,
-    autoplay:true,
-    animationData:require("../../../src/images/noTrashLottie.json")
-    })
+//   const GetNoTrashLottie = ()=>{
+//     //lottie
+//     const nocontainer = useRef();
+//     useEffect(()=>{
+//     lottie.loadAnimation({
+//     container: nocontainer.current,
+//     renderer: 'svg',
+//     loop: false,
+//     autoplay:true,
+//     animationData:require("../../../src/images/noTrashLottie.json")
+//     })
 
- },[])
-   return(
-    <Container
-        display="flex"
-        flexDirection="column"
-        justifyContent="center"
-        alignItems="center"
-        style={{margin:100,}}>
-            <Box
-                ref={nocontainer}
-                sx={{size:"small", height:200}}>
-            </Box>
-            <Typography
-                justifyContent="center"
-                textAlign="center"
-                sx={{marginTop:5,  fontSize:12}}>
-                쓰레기를 사진을 업로드 해보세요.
-            </Typography>
+//  },[])
+//    return(
+//     <Container
+//         // display="flex"
+//         // flexDirection="column"
+//         // justifyContent="center"
+//         // alignItems="center"
+//         style={{margin:100,}}>
+//             <Box
+//                 ref={nocontainer}
+//                 sx={{size:"small", height:200}}>
+//             </Box>
+//             <Typography
+//                 justifyContent="center"
+//                 textAlign="center"
+//                 sx={{marginTop:5,  fontSize:12}}>
+//                 쓰레기를 사진을 업로드 해보세요.
+//             </Typography>
 
-       </Container>
+//        </Container>
 
        
-   )
-}
+//    )
+// }
 
 
 
@@ -94,6 +94,10 @@ function MyTrashcan() {
 
     return(
         <Container
+        // display="flex"
+        // flexDirection="column"
+        // justifyContent="center"
+        // alignItems="center"
             style={{
                 border: "solid",
                 borderRadius: 5,
@@ -129,7 +133,7 @@ function MyTrashcan() {
                     </Typography>
                     <GreenSwitch
                         defaultChecked size="small"
-                        style={{ color: "primary", backgoundColor: "#E7F5EF"}}
+                        style={{ color: "primary", }}
                         inputProps={{ 'aria-label': 'controlled' }}
                         sx={{mt: 1.5,}}
                         />
@@ -142,7 +146,9 @@ function MyTrashcan() {
                         borderRadius: 5,
                         borderColor: "white",
                         height: "100vh",
-                        pt:2, pb:2}}>
+                        // pt:2,
+                        // pb:2
+                    }}>
                             {
                                 trash.length === 0 ? (
                                     <Box
@@ -152,7 +158,7 @@ function MyTrashcan() {
                                         alignItems: "center",
                                         justifyContent: "space-evenly"
                                     }}>
-                                        <GetNoTrashLottie />
+                                        {/* <GetNoTrashLottie /> */}
                                     </Box>
                                 ):
                                 (<Box
@@ -164,7 +170,7 @@ function MyTrashcan() {
                                     }}
                                     >
                                         {trash?.map((content, index)=>(
-                                            <MultiActionAreaCard image={content.img} key={index}/>
+                                            <MultiActionAreaCard image={content} key={index}/>
                                         ))}
                                         
                                         {/* <MultiActionAreaCard /> */}

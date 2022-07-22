@@ -18,15 +18,15 @@ function Dates() {
 const [StartDate, setStartDate] = React.useState(null);
 const [EndDate, setEndDate] = React.useState(null);
 
-const handleStartChange = (date) => {
-  setStartDate(date.getFullYear() + '-' + (date.getMonth() + 1).toString().padStart(2, '0') + '-' + date.getDate().toString().padStart(2, '0'));
+const handleStartChange = (date : any) => {
+  setStartDate(date);
 };
 
-const handleEndChange = (date) => {
-  setEndDate(date.getFullYear() + '-' + (date.getMonth() + 1).toString().padStart(2, '0') + '-' + date.getDate().toString().padStart(2, '0'));
+const handleEndChange = (date : any) => {
+  setEndDate(date);
 };
 
-const handleSubmit = (data) => {
+const handleSubmit = (data : any) => {
   data.preventDefault();
   console.log(StartDate);
   console.log(EndDate);
@@ -50,9 +50,9 @@ const handleSubmit = (data) => {
     >
     <LocalizationProvider dateAdapter={AdapterDateFns}> 
         <DatePicker
-          label="시작 날짜"
-          id="startDate"
-          name="startDate"
+          // label="시작 날짜"
+          // id="startDate"
+          // name="startDate"
           inputFormat="yyyy/MM/dd"
           value={StartDate}
           onChange={handleStartChange}
@@ -60,17 +60,19 @@ const handleSubmit = (data) => {
         />
          <Typography color="black" fontWeight="bold" sx={{fontSize: "medium", mx: 2}}>to</Typography>
         <DatePicker
-          label="종료 날짜"
-          id="endDate"
-          name="endDate"
+          // label="종료 날짜"
+          // id ="endDate"
+          // name="endDate"
           inputFormat="yyyy/MM/dd"
           value={EndDate}
           onChange={handleEndChange}
           minDate={StartDate}
           renderInput={(params) => <TextField size="small" {...params}  sx={{width: '35%'}} />}
         />
-      <Button type="submit" width="10px" variant="contained"
-      sx={{ height : 40, color : 'white',fontWeight: 'bold',fontSize:18, marginLeft:3, backgroundColor:"#759F98"}}>조회</Button>
+      <Button type="submit"  variant="contained"
+      sx={{ height : 40, width : 10 ,color : 'white',fontWeight: 'bold',fontSize:18, marginLeft:3, backgroundColor:"#759F98"}}>
+        조회
+      </Button>
     </LocalizationProvider>
     </Grid>
     </ThemeProvider>

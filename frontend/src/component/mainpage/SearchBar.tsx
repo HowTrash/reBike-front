@@ -4,8 +4,8 @@ import * as React from "react";
 import {useState} from "react";
 import { Link } from 'react-router-dom'
 
-const SearchBar= () =>{
-  const handleSubmit = (e) => {
+const SearchBar = () =>{
+  const handleSubmit = (e : React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
   const data = new FormData(e.currentTarget);
     const searchData = {

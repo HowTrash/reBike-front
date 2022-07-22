@@ -1,7 +1,15 @@
-import { useState, useRef, useEffect} from 'react';
-import {Button, Container, Box, Link,CssBaseline, Hidden, Typography} from '@mui/material';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
-import lottie from 'lottie-web'
+import { useState, useRef, useEffect } from "react";
+import {
+  Button,
+  Container,
+  Box,
+  Link,
+  CssBaseline,
+  Hidden,
+  Typography,
+} from "@mui/material";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
+import lottie from "lottie-web";
 
 const theme = createTheme({
     palette: {
@@ -11,36 +19,53 @@ const theme = createTheme({
     },
   });
 
-  const GetLogoLottie = ()=>{
-    //lottie
-    const likecontainer = useRef();
-    useEffect(()=>{
-    lottie.loadAnimation({
-    container: likecontainer.current,
-    renderer: 'svg',
-    loop: false,
-    autoplay:true,
-    animationData:require("../images/LottieLogo.json")
-    })
-
- },[])
-   return(
-
-      <Link 
-        href="/mainpage"
-        sx={{position: 'absolute',left: 55, top:-5, width: 180, height: 140,textDecoration:'none'}}> 
-        <Button 
-          ref={likecontainer}
-          style={{fontSize : 20, color : "black", fontWeight: 'bold', justifyContent: "flex-end",  mb: 5}}>
-          </Button>
-          <Typography
-            style={{fontSize: 8,fontWeight:"bold",display:"flex", justifyContent: "center",}}>
-            R e B I K E</Typography>     
-       </Link>
-
-       
-   )
-}
+// const GetLogoLottie = () => {
+//   //lottie
+//   const likecontainer = useRef();
+//   useEffect(() => {
+//     lottie.loadAnimation({
+//       container: likecontainer.current,
+//       renderer: "svg",
+//       loop: false,
+//       autoplay: true,
+//       animationData: require("../images/LottieLogo.json"),
+//     });
+//   }, []);
+//   return (
+//     <Link
+//       href="/mainpage"
+//       sx={{
+//         position: "absolute",
+//         left: 55,
+//         top: -5,
+//         width: 180,
+//         height: 140,
+//         textDecoration: "none",
+//       }}
+//     >
+//       <Button
+//         ref={likecontainer}
+//         style={{
+//           fontSize: 20,
+//           color: "black",
+//           fontWeight: "bold",
+//           justifyContent: "flex-end",
+//           mb: 5,
+//         }}
+//       ></Button>
+//       <Typography
+//         style={{
+//           fontSize: 8,
+//           fontWeight: "bold",
+//           display: "flex",
+//           justifyContent: "center",
+//         }}
+//       >
+//         R e B I K E
+//       </Typography>
+//     </Link>
+//   );
+// };
 
 function Header() {
 
@@ -53,14 +78,12 @@ function Header() {
     setMouseOn(false);
   };
 
-
   const token = localStorage.getItem("access_token");
   console.log(token);
 
   function deleteToken() {
     localStorage.removeItem("access_token");
   }
-
 
   return (
       <ThemeProvider theme={theme}>
@@ -73,7 +96,7 @@ function Header() {
                   alignItems="flex-end"
                   marginLeft= "auto"
               >
-                  <GetLogoLottie />
+              {/*      <GetLogoLottie /> */}
 
                   {token ?(
                   // if IsLogin is true
@@ -88,7 +111,7 @@ function Header() {
                     </Link>
                     </Button>
                     
-                    {mouseOn?
+                    {/* {mouseOn?
                     <Container
                       style={{ position: 'absolute', top: 80 }}>
                       <Box 
@@ -101,7 +124,7 @@ function Header() {
                       </Box>
                     </Container>
                     :
-                    Hidden}
+                    Hidden} */}
                     
                     <Button
                       variant="contained"

@@ -1,5 +1,5 @@
 import * as React from "react";
-import {useState} from "react";
+import { useState } from "react";
 import {
     Typography,
     Container,
@@ -8,39 +8,36 @@ import {
 } from "@mui/material";
 import Chart from "../chart/Chart";
 import Date from "../chart/Date";
-interface MytrashList{
-    trash_kind : string;
-    cnt : number;
-}
 
 function MyTrashcan() {
     const [userData, setUserData] = useState<any>('');
-    const onClickRetrieve = (user:any) => {
-        setUserData(user.map((data:any)=>data.cnt));
+    const onClickRetrieve = (user: any) => {
+        setUserData(user.map((data: any) => data.cnt));
     }
-    console.log("잘 나왔는지?",userData);
+    console.log("잘 나왔는지?", userData);
 
-    return(
+    return (
         <Container
             style={{
                 border: "solid",
                 borderRadius: 5,
-                borderColor:"transparent",
+                borderColor: "transparent",
                 minWidth: "100%",
                 height: "80vh",
             }}>
-                    <Typography color="black" fontWeight="bold" sx={{mt: 3, mb: 2, fontSize: "medium"}}>
-                        내 쓰레기 통계
-                    </Typography>
-                <Container
-                    style={{
-                        borderRadius: 8,
-                        backgroundColor: "white",
-                        height: "50vh"}}
-                        sx={{mt:3}}>
-                            <Date onClickRetrieve={onClickRetrieve}/>
-                               <Chart content={userData}/>    
-                </Container>
+            <Typography color="black" fontWeight="bold" sx={{ mt: 3, mb: 2, fontSize: "medium" }}>
+                내 쓰레기 통계
+            </Typography>
+            <Container
+                style={{
+                    borderRadius: 8,
+                    backgroundColor: "white",
+                    height: "50vh"
+                }}
+                sx={{ mt: 3 }}>
+                <Date onClickRetrieve={onClickRetrieve} />
+                {userData.length!==0 && <Chart list={userData} />}
+            </Container>
         </Container>
     );
 }

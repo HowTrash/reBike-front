@@ -1,39 +1,52 @@
+import { ConstructionRounded } from '@mui/icons-material';
 import React, { PureComponent } from 'react';
 import {BarChart, Bar, Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
-class TrashChart extends PureComponent {
+
+const chartdata = [
+  {
+    trash_kind: '종이', cnt : 20,
+  },
+  {
+    trash_kind: '플라스틱', cnt : 10,
+  },
+  {
+    trash_kind: '캔', cnt : 5,
+  },
+  {
+    trash_kind: '비닐', cnt : 8,
+  },
+  {
+    trash_kind: '유리', cnt : 10,
+  },
+  {
+    trash_kind: 'Page F', cnt : 15,
+  },
+  {
+    trash_kind: 'Page G', cnt : 8,
+  },
+];
+
+/*
+export interface chartData{
+  trash_kind:string;
+  cnt:number;
+}
+
+const chartdata = (props:chartData)=>{
+  const {trash_kind, cnt} = props;
+  return props;
+}
+*/
+export default class TrashChart extends PureComponent {
   static demoUrl = 'https://codesandbox.io/s/simple-bar-chart-tpz8r';
 
   render() {
-
-const data = [
-  {
-    name: '종이', "쓰레기 수" : 20,
-  },
-  {
-    name: '플라스틱', "쓰레기 수" : 10,
-  },
-  {
-    name: '캔', "쓰레기 수" : 5,
-  },
-  {
-    name: '비닐', "쓰레기 수" : 8,
-  },
-  {
-    name: '유리', "쓰레기 수" : 10,
-  },
-  {
-    name: 'Page F', "쓰레기 수" : 15,
-  },
-  {
-    name: 'Page G', "쓰레기 수" : 8,
-  },
-];
     return (
       <ResponsiveContainer width="100%" height="100%">
         <BarChart
           width={400}
           height={300}
-          data={data}
+          data={chartdata}
           margin={{
             top: 20,
             right: 30,
@@ -42,15 +55,14 @@ const data = [
           }}
         >
           <CartesianGrid strokeDasharray="3 3" />
-          <XAxis dataKey="name" />
+          <XAxis dataKey='trash_kind' />
           <YAxis />
           <Tooltip />
           <Legend />
-          <Bar dataKey= "쓰레기 수" fill="#759F98" barSize={40} />
+          <Bar dataKey='cnt' fill="#759F98" barSize={40} />
         </BarChart>
       </ResponsiveContainer>
     );
   }
 }
 
-export default TrashChart;

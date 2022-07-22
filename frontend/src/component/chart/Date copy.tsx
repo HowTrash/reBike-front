@@ -37,7 +37,7 @@ function formatBeforeDate(date: Date) {
 } // 일주일 전
 const DateBefore = formatBeforeDate(new Date());
 
-function Dates({onClickRetrieve}:{onClickRetrieve:any}) {
+function Dates() {
 const [StartDate, setStartDate] = React.useState(DateBefore);
 const [EndDate, setEndDate] = React.useState(DateNow);
 const [UserData, setUserData] = React.useState<string[]>([]);
@@ -58,14 +58,15 @@ const HandleSubmit = (event : any) => {
   console.log(EndDate);
   {
     axios
-      .get(`http://localhost:8080/trash/mypage/users/f71c29ef-ed21-44d2-be0f-e26c4efdd3e9	/statistics/period/${StartDate}/${EndDate}`)
+      .get(`http://localhost:8080/trash/mypage/users/ab0c3425-6f7a-4b20-9b9b-c343b71c23d5/statistics/period/${StartDate}/${EndDate}`)
       .then((response) => {
         // Handle success.
-        const tempUserData =  response.data.map((data:any)=> data.cnt);
-        console.log("Well done!");
-        console.log(response.data);
         setUserData(response.data);
-        onClickRetrieve(tempUserData);
+        console.log("Well done!");
+        UserData.map((data:any)=> {
+          console.log(data.cnt);
+          return UserData;
+        }); // 저장된 데이터들 호출, 반복 일단 멈춤
       })
       .catch((error) => {
         // Handle error.
@@ -99,7 +100,7 @@ const HandleSubmit = (event : any) => {
           inputFormat="yyyy/MM/dd"
           value={EndDate}
           onChange={HandleEndChange as any}
-          minDate={StartDate}
+          minDate={StartDate as String}
           renderInput={(params) => <TextField size="small" {...params}  sx={{width: '35%'}} />}
         />
       <Button

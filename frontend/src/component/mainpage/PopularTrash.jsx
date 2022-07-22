@@ -2,7 +2,7 @@ import {Typography, Box} from "@mui/material";
 import FirstImg  from '../../../src/images/firstImg.svg';
 import SecondImg from '../../../src/images/secondImg.svg';
 import ThirdImg from '../../../src/images/thirdImg.svg';
-import TrashCardView from "../../component/mainpage/TrashCardView";
+import TrashCardView from "./TrashCardView";
 import AutoGraphIcon from '@mui/icons-material/AutoGraph';
 
 

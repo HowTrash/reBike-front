@@ -1,4 +1,5 @@
 import * as React from "react";
+import {useState} from "react";
 import {
     Typography,
     Container,
@@ -9,6 +10,12 @@ import Chart from "../chart/Chart";
 import Date from "../chart/Date";
 
 function MyTrashcan() {
+
+    const [userData, setUserData] = useState<any>(null);
+    const onClickRetrieve = (user:any) => {
+        setUserData(user);
+    }
+    console.log("데이터",userData);
     return(
         <Container
             style={{
@@ -27,8 +34,8 @@ function MyTrashcan() {
                         backgroundColor: "white",
                         height: "50vh"}}
                         sx={{mt:3}}>
-                            <Date/>
-                               <Chart/>    
+                            <Date onClickRetrieve={onClickRetrieve}/>
+                               <Chart />    
                 </Container>
         </Container>
     );

@@ -3,11 +3,18 @@ import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Resizer from "react-image-file-resizer";
+import Api from "../../utils/customApi";
+
+interface TrashImg {
+  user_id : string, 
+  img : string
+}
 
 function UploadImage() {
   const [image, setImage] = useState(null);
-  const [preview, setPreview] = useState("");
+  const [preview, setPreview] = useState<string>("");
   const navigate = useNavigate();
+  const [resFile, setResFile] = useState<string>("");
 
   const resizeFile = (file : Blob) =>
     new Promise((resolve) => {
@@ -25,29 +32,56 @@ function UploadImage() {
       );
     });
 
-  const onChange2 = async (event : React.ChangeEvent<HTMLInputElement>) => {
+  const onChangeImage = async (event : React.ChangeEvent<HTMLInputElement>) => {
     try {
-      //(event.target.files instanceof FileList) ? event.target.files[0] : "";
       const file : any = (event.target.files instanceof FileList) ? event.target.files[0] : "";
-      // const file = event.target.files[0];
+      setResFile(file.name);
+      //console.log(file); 파일 자체를 넘기려면 file 객체 사용 type : image
       const img : any = await resizeFile(file);
-      setImage(img); // update image
+      setImage(img); 
       setPreview(URL.createObjectURL(img));
-      const formData = new FormData();
-      formData.append("file", file);
       console.log("success upload image!");
-      console.log(formData);
-      // console.log(event.target.files[0]);
-    } catch (err) {
+      console.log({preview});
+     
+    } 
+    catch (err) {
       console.log(err);
     }
   };
+  
+  const trashImg : TrashImg = {
+    user_id : "71cc57de-f562-4d54-9645-ec4922604007",  // 이거 들어가는지 모르겠음 아마 filename 으로  될 듯 .
+    img : resFile
+  }
 
-  const onClick = () => {
-    if (image === null) return alert("no image");
+  console.log(trashImg);
+
+  const fetchMyTrash = async () => {
+      const result = await Api.post<TrashImg>(`/trash/mainpage/users/${trashImg.user_id}/result`,trashImg)
+      .then(
+          res => res.data
+      )
+      .catch((error) => {
+        // Handle error.
+        console.log("An error occurred:", error.response);
+      });
+     // setTrash(result);
+      console.log("api요청 결과",result)
+
+
+  }
+
+
+  const onClickImgResult = () => {
+    if (image === null) 
+      return alert("no image");
     else {
       navigate("/mainpage/resultpage", { state: preview });
     }
+
+  fetchMyTrash();
+
+
   };
 
   return (
@@ -70,7 +104,7 @@ function UploadImage() {
           component="label"
         >
           <img src={preview}></img>
-          <input type="file" hidden required onChange={(e) => onChange2(e)} />
+          <input type="file" hidden required onChange={(e) => onChangeImage(e)} />
           {image ? null : (
             <Box>
               {" "}
@@ -87,7 +121,7 @@ function UploadImage() {
         </Button>
         <Box>
           <Button
-            onClick={onClick}
+            onClick={onClickImgResult}
             variant="contained"
             sx={{
               "&:hover": {

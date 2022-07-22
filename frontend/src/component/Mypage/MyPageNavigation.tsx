@@ -12,6 +12,10 @@ const sidebarNavItems = [{
         to: '/mypage/myTrashChart',
         section: 'started'
     },{
+        display: '도전! 재활용',
+        to: '/mypage/myChallenge',
+        section: 'started'
+    },{
         display: '내 정보 변경',
         to: '/mypage/userInfo',
         section: 'calendar'

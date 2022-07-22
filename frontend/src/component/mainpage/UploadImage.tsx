@@ -5,18 +5,13 @@ import { useNavigate } from "react-router-dom";
 import Resizer from "react-image-file-resizer";
 import Api from "../../utils/customApi";
 
-interface TrashImg {
-  user_id : string, 
-  img : File | null
-}
-
 function UploadImage() {
-  const [image, setImage] = useState(null); //image 존재 여부 
+  const [image, setImage] = useState(null); //image 존재 여부
   const [preview, setPreview] = useState<string>(""); //이미지 주소값
-  const navigate = useNavigate(); 
-  const [resFile, setResFile] = useState<File | null>(null); //넘겨줄 파일 이름으로 할려했으나 파일이면 string 말고 file로 해야함 
+  const navigate = useNavigate();
+  const [resFile, setResFile] = useState(null); //넘겨줄 파일 이름으로 할려했으나 파일이면 string 말고 file로 해야함
 
-  const resizeFile = (file : Blob) =>
+  const resizeFile = (file: Blob) =>
     new Promise((resolve) => {
       Resizer.imageFileResizer(
         file,
@@ -31,57 +26,46 @@ function UploadImage() {
         "file" // 저장 형식
       );
     });
+  const formdata = new FormData();
 
-  const onChangeImage = async (event : React.ChangeEvent<HTMLInputElement>) => {
+  const onChangeImage = async (event: React.ChangeEvent<HTMLInputElement>) => {
     try {
-      const file : any = (event.target.files instanceof FileList) ? event.target.files[0] : null;
-      setResFile(file); // 이거 아마 첨부파일로 넘겨야하는것 같음 그냥 file 써주면 될 듯? 
-      //console.log(file); 파일 자체를 넘기려면 file 객체 사용 type : image
-      const img : any = await resizeFile(file);
-      setImage(img); 
+      const file: any =
+        event.target.files instanceof FileList ? event.target.files[0] : null;
+
+      setResFile(file);
+
+      const img: any = await resizeFile(file);
+      setImage(img);
       setPreview(URL.createObjectURL(img));
       console.log("success upload image!");
-      console.log({preview});
-     
-    } 
-    catch (err) {
+      console.log({ preview });
+    } catch (err) {
       console.log(err);
     }
   };
-  
-  const trashImg : TrashImg = {
-    user_id : "71cc57de-f562-4d54-9645-ec4922604007",  // 이거 들어가는지 모르겠음 아마 filename 으로  될 듯 .
-    img : resFile
-  }
 
-  console.log(trashImg);
-
-  const fetchMyTrash = async () => {
-      const result = await Api.post<TrashImg>(`/trash/mainpage/users/${trashImg.user_id}/result`,trashImg)
-      .then(
-          res => res.data
-      )
+  const sendImage = async () => {
+    formdata.append("filename", resFile as any);
+    console.log(formdata);
+    await Api.post(
+      `/trash/mainpage/users/f446242a-a219-44b9-aef7-86932259f799/result`,
+      formdata
+    )
+      .then((res) => res.data)
       .catch((error) => {
         // Handle error.
         console.log("An error occurred:", error.response);
       });
-     // setTrash(result);
-      console.log("api요청 결과",result)
-
-
-  }
-
+  };
 
   const onClickImgResult = () => {
-    if (image === null) 
-      return alert("no image");
+    if (image === null) return alert("no image");
     else {
       navigate("/mainpage/resultpage", { state: preview });
     }
 
-  fetchMyTrash();
-
-
+    sendImage();
   };
 
   return (
@@ -104,7 +88,12 @@ function UploadImage() {
           component="label"
         >
           <img src={preview}></img>
-          <input type="file" hidden required onChange={(e) => onChangeImage(e)} />
+          <input
+            type="file"
+            hidden
+            required
+            onChange={(e) => onChangeImage(e)}
+          />
           {image ? null : (
             <Box>
               {" "}

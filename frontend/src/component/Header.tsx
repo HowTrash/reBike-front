@@ -19,53 +19,25 @@ const theme = createTheme({
     },
   });
 
-// const GetLogoLottie = () => {
-//   //lottie
-//   const likecontainer = useRef();
-//   useEffect(() => {
-//     lottie.loadAnimation({
-//       container: likecontainer.current,
-//       renderer: "svg",
-//       loop: false,
-//       autoplay: true,
-//       animationData: require("../images/LottieLogo.json"),
-//     });
-//   }, []);
-//   return (
-//     <Link
-//       href="/mainpage"
-//       sx={{
-//         position: "absolute",
-//         left: 55,
-//         top: -5,
-//         width: 180,
-//         height: 140,
-//         textDecoration: "none",
-//       }}
-//     >
-//       <Button
-//         ref={likecontainer}
-//         style={{
-//           fontSize: 20,
-//           color: "black",
-//           fontWeight: "bold",
-//           justifyContent: "flex-end",
-//           mb: 5,
-//         }}
-//       ></Button>
-//       <Typography
-//         style={{
-//           fontSize: 8,
-//           fontWeight: "bold",
-//           display: "flex",
-//           justifyContent: "center",
-//         }}
-//       >
-//         R e B I K E
-//       </Typography>
-//     </Link>
-//   );
-// };
+const GetLogoLottie = () => {
+  //lottie
+  const likecontainer = useRef<HTMLDivElement>();
+  useEffect(() => {
+    lottie.loadAnimation({
+      container: likecontainer.current as HTMLDivElement,
+      renderer: "svg",
+      loop: false,
+      autoplay: true,
+      animationData: require("../images/LottieLogo.json"),
+    });
+  }, []);
+  return (
+    <Box
+      ref={likecontainer}>
+
+      </Box>
+  );
+};
 
 function Header() {
 
@@ -96,35 +68,57 @@ function Header() {
                   alignItems="flex-end"
                   marginLeft= "auto"
               >
-              {/*      <GetLogoLottie /> */}
-
+                    <Link
+                      href="/mainpage"
+                      sx={{
+                        position: "absolute",
+                        left: 55,
+                        top: -5,
+                        width: 180,
+                        height: 140,
+                        textDecoration: "none",
+                      }}
+                    >
+                      <GetLogoLottie />
+                      <Typography
+                        style={{
+                          fontSize: 8,
+                          fontWeight: "bold",
+                          display: "flex",
+                          justifyContent: "center",
+                        }}
+                      >
+                        R e B I K E
+                      </Typography>
+                    </Link>
                   {token ?(
                   // if IsLogin is true
                   <div>
                     <Button>
                       <Link
-                      href="/login"
-                      onClick={deleteToken}
-                      onMouseEnter={handlePopoverOpen} onMouseLeave={handlePopoverClose}
-                      sx={{ textDecoration: "none", color: "#759F98", fontSize: "small",mr:2, mt:4 }}>
-                      Welcom, {token} 님
-                    </Link>
+                        href="/mainpage"
+                        onClick={deleteToken}
+                        onMouseEnter={handlePopoverOpen} onMouseLeave={handlePopoverClose}
+                        sx={{ textDecoration: "none", color: "#759F98", fontSize: "small",mr:2, mt:4 }}>
+                        Welcom, {token} 님
+                      </Link>
+                      {/* {mouseOn?
+                      <Container
+                        style={{ position: 'absolute', top: 80 }}>
+                        <Box 
+                          display="flex" justifyContent="center" 
+                          sx={{
+                            background: "white", border: 1, borderRadius: 1, borderColor: "#E7F5EF", color: "#759F98",
+                            fontSize: 3, padding: 1, width: 100
+                            }}>
+                          클릭해서 로그아웃
+                        </Box>
+                      </Container>
+                      :
+                      Hidden} */}
                     </Button>
                     
-                    {/* {mouseOn?
-                    <Container
-                      style={{ position: 'absolute', top: 80 }}>
-                      <Box 
-                        display="flex" justifyContent="center" 
-                        sx={{
-                          background: "white", border: 1, borderRadius: 1, borderColor: "#E7F5EF", color: "#759F98",
-                          fontSize: 3, padding: 1, width: 100
-                          }}>
-                        클릭해서 로그아웃
-                      </Box>
-                    </Container>
-                    :
-                    Hidden} */}
+                    
                     
                     <Button
                       variant="contained"

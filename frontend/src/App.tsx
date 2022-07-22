@@ -8,18 +8,18 @@ import Header from "./component/Header";
 import Register from "./Page/Register";
 import Howto from "./Page/Howto";
 
-import { ReactComponent as GreenBack } from "./images/greenBack.svg";
+import GreenBack from "./images/greenBack";
 import MyTrashcan from "./component/Mypage/MyTrashcan";
 import MyTrashChart from "./component/Mypage/MyTrashChart";
 import ChangeInfo from "./component/Mypage/ChangeInfo";
 import SearchResult from "./component/mainpage/SearchResult";
 
-function IsLogin(access_token){
+function IsLogin(access_token : any){
     const [login, setLogin] = useState(false);
     console.log("왜 안됨?")
 
     useEffect(()=>{
-        if(localStorage.getItem({access_token}) !== null){
+        if(localStorage.getItem(access_token) !== null){
             console.log("로그인 on", setLogin)
         }else{
             setLogin(false);

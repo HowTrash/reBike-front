@@ -20,7 +20,7 @@ const MyTrashcanBtn = styled(Button)(({}) => ({
 }));
 
 
-export default function MultiActionAreaCard({image}) {
+export default function MultiActionAreaCard(image : any) {
     // export default function MultiActionAreaCard() {
 
   return (

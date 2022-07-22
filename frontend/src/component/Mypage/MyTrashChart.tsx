@@ -8,14 +8,19 @@ import {
 } from "@mui/material";
 import Chart from "../chart/Chart";
 import Date from "../chart/Date";
+interface MytrashList{
+    trash_kind : string;
+    cnt : number;
+}
 
 function MyTrashcan() {
-
-    const [userData, setUserData] = useState<any>(null);
+    const [userData, setUserData] = useState<any>('');
     const onClickRetrieve = (user:any) => {
         setUserData(user);
     }
-    console.log("데이터",userData);
+
+    console.log("데이터 받아와지는지",userData);
+    console.log("데이터 줄 수 있는지",userData[0]);
     return(
         <Container
             style={{
@@ -35,7 +40,7 @@ function MyTrashcan() {
                         height: "50vh"}}
                         sx={{mt:3}}>
                             <Date onClickRetrieve={onClickRetrieve}/>
-                               <Chart />    
+                               <Chart content={userData}/>    
                 </Container>
         </Container>
     );

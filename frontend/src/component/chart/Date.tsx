@@ -37,7 +37,8 @@ function formatBeforeDate(date: Date) {
 } // 일주일 전
 const DateBefore = formatBeforeDate(new Date());
 
-function Dates({onClickRetrieve}:{onClickRetrieve:any}) {
+function Dates({onClickRetrieve}:{onClickRetrieve:any}) { // 함수의 반환 : onClickRetrieve
+
 const [StartDate, setStartDate] = React.useState(DateBefore);
 const [EndDate, setEndDate] = React.useState(DateNow);
 const [UserData, setUserData] = React.useState<string[]>([]);
@@ -58,14 +59,13 @@ const HandleSubmit = (event : any) => {
   console.log(EndDate);
   {
     axios
-      .get(`http://localhost:8080/trash/mypage/users/f71c29ef-ed21-44d2-be0f-e26c4efdd3e9	/statistics/period/${StartDate}/${EndDate}`)
+      .get(`http://localhost:8080/trash/mypage/users/e4dbb5be-6650-4d33-8d5c-ce39c2de3968	/statistics/period/${StartDate}/${EndDate}`)
       .then((response) => {
         // Handle success.
-        const tempUserData =  response.data.map((data:any)=> data.cnt);
-        console.log("Well done!");
-        console.log(response.data);
+        const responseUserData =  response.data;
+        console.log("data saved!");
         setUserData(response.data);
-        onClickRetrieve(tempUserData);
+        onClickRetrieve(responseUserData);
       })
       .catch((error) => {
         // Handle error.

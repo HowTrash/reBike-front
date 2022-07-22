@@ -1,31 +1,7 @@
 import { ConstructionRounded } from '@mui/icons-material';
 import React, { PureComponent,useState } from 'react';
 import {BarChart, Bar, Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
-/*
-const chartdata = [
-  {
-    trash_kind: '종이', cnt : 20,
-  },
-  {
-    trash_kind: '플라스틱', cnt : 10,
-  },
-  {
-    trash_kind: '캔', cnt : 5,
-  },
-  {
-    trash_kind: '비닐', cnt : 8,
-  },
-  {
-    trash_kind: '유리', cnt : 10,
-  },
-  {
-    trash_kind: 'Page F', cnt : 15,
-  },
-  {
-    trash_kind: 'Page G', cnt : 8,
-  },
-];
-*/
+
 interface ChartData{
   trash_kind:string;
   cnt:number;
@@ -49,7 +25,7 @@ class TrashChart extends PureComponent<ChartDataList> {
   }
 
   render() {
-    console.log(this.state.content.content);
+    console.log("잘 받아왔는지?",this.state.content);
     return (
       <ResponsiveContainer width="100%" height="100%">
         <BarChart

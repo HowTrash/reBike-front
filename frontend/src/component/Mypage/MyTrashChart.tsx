@@ -16,11 +16,10 @@ interface MytrashList{
 function MyTrashcan() {
     const [userData, setUserData] = useState<any>('');
     const onClickRetrieve = (user:any) => {
-        setUserData(user);
+        setUserData(user.map((data:any)=>data.cnt));
     }
+    console.log("잘 나왔는지?",userData);
 
-    console.log("데이터 받아와지는지",userData);
-    console.log("데이터 줄 수 있는지",userData[0]);
     return(
         <Container
             style={{

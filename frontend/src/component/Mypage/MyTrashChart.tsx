@@ -12,7 +12,7 @@ import Date from "../chart/Date";
 function MyTrashcan() {
     const [userData, setUserData] = useState<any>('');
     const onClickRetrieve = (user: any) => {
-        setUserData(user.map((data: any) => data.cnt));
+        setUserData(user);
     }
     console.log("잘 나왔는지?", userData);
 

@@ -1,31 +1,31 @@
 import { ConstructionRounded } from '@mui/icons-material';
-import React, { PureComponent,useState } from 'react';
-import {BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
+import React, { PureComponent, useState } from 'react';
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 
-interface ChartData{
-  trash_kind:string;
-  cnt:number;
+interface ChartData {
+  trash_kind: string;
+  cnt: number;
 }
 
-interface ChartDataList{
-  content:Array<ChartData>
+interface ChartDataList {
+  content: Array<ChartData>
 }
 
-const trashkind:string = 'a';
-const count:number = 1;
+const trashkind: string = 'a';
+const count: number = 1;
 
 class TrashChart extends PureComponent<ChartDataList> {
   static demoUrl = 'https://codesandbox.io/s/simple-bar-chart-tpz8r';
-   state={
-    content :{[trashkind]:[count]}
+  state = {
+    content: { [trashkind]: [count] }
   }
-  constructor(props:any){
+  constructor(props: any) {
     super(props);
-      this.state.content=props;
+    this.state.content = props;
   }
 
   render() {
-    console.log("잘 받아왔는지?",this.state.content.content);
+    console.log("잘 받아왔는지?", this.state.content.content);
     return (
       <ResponsiveContainer width="100%" height="100%">
         <BarChart

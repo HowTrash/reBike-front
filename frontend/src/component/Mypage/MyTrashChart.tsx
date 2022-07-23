@@ -36,7 +36,7 @@ function MyTrashcan() {
                 }}
                 sx={{ mt: 3 }}>
                 <Date onClickRetrieve={onClickRetrieve} />
-                {userData.length!==0 && <Chart list={userData} />}
+                {userData.length !== 0 && <Chart list={userData} />}
             </Container>
         </Container>
     );

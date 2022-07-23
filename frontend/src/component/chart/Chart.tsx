@@ -11,7 +11,7 @@ interface Contentlist {
 }
 
 function TrashChart({ list }: Contentlist) {
-  console.log("잘 받아와지는지?", list);
+  console.log("잘 받아와졌는지?", list);
   return (
     <ResponsiveContainer width="100%" height="100%">
       <BarChart
